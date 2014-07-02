@@ -12,10 +12,25 @@
 		AAB440DF19631FAF004F8EA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB440DD19631FAF004F8EA2 /* Main.storyboard */; };
 		AAB440E119631FAF004F8EA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAB440E019631FAF004F8EA2 /* Images.xcassets */; };
 		AAB440ED19631FAF004F8EA2 /* Swift_PushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB440EC19631FAF004F8EA2 /* Swift_PushTests.swift */; };
+		AAB440F71963232E004F8EA2 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB440F61963232E004F8EA2 /* NotificationCenter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		AAB440E719631FAF004F8EA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAB440CC19631FAF004F8EA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AAB440D319631FAF004F8EA2;
+			remoteInfo = "Swift Push";
+		};
+		AABE52F119634250002D010D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAB440CC19631FAF004F8EA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AAB440D319631FAF004F8EA2;
+			remoteInfo = "Swift Push";
+		};
+		AABE52F319634250002D010D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AAB440CC19631FAF004F8EA2 /* Project object */;
 			proxyType = 1;
@@ -34,6 +49,7 @@
 		AAB440E619631FAF004F8EA2 /* Swift PushTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift PushTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB440EB19631FAF004F8EA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAB440EC19631FAF004F8EA2 /* Swift_PushTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_PushTests.swift; sourceTree = "<group>"; };
+		AAB440F61963232E004F8EA2 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAB440F71963232E004F8EA2 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +74,7 @@
 		AAB440CB19631FAF004F8EA2 = {
 			isa = PBXGroup;
 			children = (
+				AAB440F61963232E004F8EA2 /* NotificationCenter.framework */,
 				AAB440D619631FAF004F8EA2 /* Swift Push */,
 				AAB440E919631FAF004F8EA2 /* Swift PushTests */,
 				AAB440D519631FAF004F8EA2 /* Products */,
@@ -141,6 +159,8 @@
 			);
 			dependencies = (
 				AAB440E819631FAF004F8EA2 /* PBXTargetDependency */,
+				AABE52F219634250002D010D /* PBXTargetDependency */,
+				AABE52F419634250002D010D /* PBXTargetDependency */,
 			);
 			name = "Swift PushTests";
 			productName = "Swift PushTests";
@@ -158,6 +178,11 @@
 				TargetAttributes = {
 					AAB440D319631FAF004F8EA2 = {
 						CreatedOnToolsVersion = 6.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					AAB440E519631FAF004F8EA2 = {
 						CreatedOnToolsVersion = 6.0;
@@ -229,6 +254,16 @@
 			target = AAB440D319631FAF004F8EA2 /* Swift Push */;
 			targetProxy = AAB440E719631FAF004F8EA2 /* PBXContainerItemProxy */;
 		};
+		AABE52F219634250002D010D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AAB440D319631FAF004F8EA2 /* Swift Push */;
+			targetProxy = AABE52F119634250002D010D /* PBXContainerItemProxy */;
+		};
+		AABE52F419634250002D010D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AAB440D319631FAF004F8EA2 /* Swift Push */;
+			targetProxy = AABE52F319634250002D010D /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -280,6 +315,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "41FF2732-EB6D-4814-898A-AAEE9D517001";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -316,6 +352,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "41FF2732-EB6D-4814-898A-AAEE9D517001";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -327,9 +364,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Steve Trease (DB3DDPLGYS)";
 				INFOPLIST_FILE = "Swift Push/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "FB33D6DC-00D6-4873-A472-313461F14A56";
 			};
 			name = Debug;
 		};
@@ -338,9 +377,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Steve Trease (DB3DDPLGYS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Steve Trease (DB3DDPLGYS)";
 				INFOPLIST_FILE = "Swift Push/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "FB33D6DC-00D6-4873-A472-313461F14A56";
 			};
 			name = Release;
 		};
@@ -399,6 +441,7 @@
 				AAB440F219631FAF004F8EA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AAB440F319631FAF004F8EA2 /* Build configuration list for PBXNativeTarget "Swift PushTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +450,7 @@
 				AAB440F519631FAF004F8EA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
