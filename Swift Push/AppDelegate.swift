@@ -31,15 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
-        println("didRegisterForRemoteNotificationsWithDeviceToken");
+        println("Received device token:");
         println( deviceToken.description )
     }
     func application(application: UIApplication!, didFailToRegisterForRemoteNotificationsWithError error:NSError!) {
-        println("didFailToRegisterForRemoteNotificationsWithError");
+        println("Failed to recieve device token");
         println( error.localizedDescription )
     }
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary ) {
-        println("push message received");
+        println("Push message received");
     }
 
     
