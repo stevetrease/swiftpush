@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println( error.localizedDescription )
     }
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary ) {
-        println("Push message received");
+        println(userInfo)
     }
 
     
