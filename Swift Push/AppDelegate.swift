@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary ) {
         println(userInfo)
+        var t1 = userInfo.objectForKey("aps")
+        var message = t1.objectForKey("alert")
+        println (message as String)
     }
 
     
