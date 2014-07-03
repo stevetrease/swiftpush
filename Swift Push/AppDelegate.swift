@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
         
+        println("didFinishLaunchingWithOptions")
+        println(notifications.items.count)
+        
         var types: UIUserNotificationType = UIUserNotificationType.Badge |
             UIUserNotificationType.Alert |
             UIUserNotificationType.Sound
@@ -40,10 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println( error.localizedDescription )
     }
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary ) {
-        println(userInfo)
         var t1 = userInfo.objectForKey("aps")
-        var message = t1.objectForKey("alert")
-        println (message as String)
+        var message = t1.objectForKey("alert") as String
+        notifications.items.append(message)
+        println (message)
     }
 
     
