@@ -8,15 +8,16 @@
 
 import UIKit
 
+// var tableView: UITableView = UITableView()
+
+
 
 class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        println("viewDidLoad")
-        // notifications.items += ["One", "Two", "Three"]
+        // println("viewDidLoad")
         println(notifications.items.count)
     }
     
@@ -34,17 +35,17 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "MyTestCell")
         cell.text = notifications.items[indexPath.row] as String
         cell.detailTextLabel.text = notifications.items[indexPath.row] as String
-        println(cell.text + " - " + cell.detailTextLabel.text)
+        println("adding row: " + cell.text)
         return cell
     }
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        println("You selected cell #\(indexPath.row)!")
+        println("selecting row: \(indexPath.row)")
     }
     func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!)
     {
         notifications.items.removeAtIndex(indexPath.row)
-        println("removing line ", indexPath.row)
+        println("removing row: ", indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
     }
     

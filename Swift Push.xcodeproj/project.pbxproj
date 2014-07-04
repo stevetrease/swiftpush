@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA5DC7461965EC2E0097FAA9 /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5DC7451965EC2E0097FAA9 /* NotificationData.swift */; };
+		AA6E250A1966F0E800990670 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA6E25091966F0E800990670 /* Settings.bundle */; };
 		AAB440DA19631FAF004F8EA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB440D919631FAF004F8EA2 /* AppDelegate.swift */; };
 		AAB440DC19631FAF004F8EA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB440DB19631FAF004F8EA2 /* ViewController.swift */; };
 		AAB440DF19631FAF004F8EA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB440DD19631FAF004F8EA2 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		AA5DC7451965EC2E0097FAA9 /* NotificationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationData.swift; sourceTree = "<group>"; };
+		AA6E25091966F0E800990670 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		AAB440D419631FAF004F8EA2 /* Swift Push.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Push.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB440D819631FAF004F8EA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAB440D919631FAF004F8EA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 		AAB440CB19631FAF004F8EA2 = {
 			isa = PBXGroup;
 			children = (
+				AA6E25091966F0E800990670 /* Settings.bundle */,
 				AAB440F61963232E004F8EA2 /* NotificationCenter.framework */,
 				AAB440D619631FAF004F8EA2 /* Swift Push */,
 				AAB440E919631FAF004F8EA2 /* Swift PushTests */,
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAB440DF19631FAF004F8EA2 /* Main.storyboard in Resources */,
+				AA6E250A1966F0E800990670 /* Settings.bundle in Resources */,
 				AAB440E119631FAF004F8EA2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

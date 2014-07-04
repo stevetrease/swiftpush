@@ -35,18 +35,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
-        println("Received device token:");
-        println( deviceToken.description )
+        var existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
+        if ( existingToken as String == deviceToken.description as String ) {
+            println("device token unchanged")
+        } else {
+            println("device token changed and saved")
+            NSUserDefaults.standardUserDefaults().setObject(deviceToken.description, forKey:"deviceToken")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        println(deviceToken.description)
+
     }
     func application(application: UIApplication!, didFailToRegisterForRemoteNotificationsWithError error:NSError!) {
-        println("Failed to recieve device token");
+        println("Failed to recieve device token")
         println( error.localizedDescription )
     }
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary ) {
-        var t1 = userInfo.objectForKey("aps")
+        var t1: AnyObject! = userInfo.objectForKey("aps")
         var message = t1.objectForKey("alert") as String
         notifications.items.append(message)
-        println (message)
+        // tableView.reloadData()
+        println ("Push message received: \(message)")
     }
 
     
