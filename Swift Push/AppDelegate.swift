@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         println("didFinishLaunchingWithOptions")
-        println(notifications.items.count)
+        // println(notifications.items.count)
         
         var types: UIUserNotificationType = UIUserNotificationType.Badge |
             UIUserNotificationType.Alert |
@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSUserDefaults.standardUserDefaults().synchronize()
         }
         println(deviceToken.description)
+        println()
 
     }
     func application(application: UIApplication!, didFailToRegisterForRemoteNotificationsWithError error:NSError!) {
@@ -56,12 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println(userInfo)
         var t1: AnyObject! = userInfo.objectForKey("aps")
         var message = t1.objectForKey("alert") as String
-        notifications.items.append(message)
+        // notifications.items.append(message)
+        notifications.items.insert(message, atIndex: 0)
         println ("Push message received by AppDeligate: \(message)")
         
         let center = NSNotificationCenter.defaultCenter()
         center.postNotificationName("dataChanged", object: self)
     }
+
 
     
     func applicationWillResignActive(application: UIApplication) {

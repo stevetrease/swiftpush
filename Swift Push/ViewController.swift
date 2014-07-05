@@ -39,8 +39,14 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "MyTestCell")
+        
+        let formatter:NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "dd MMM YYYY HH:MM:SS"
+        var dateString = formatter.stringFromDate(NSDate())
+        
         cell.text = notifications.items[indexPath.row] as String
-        cell.detailTextLabel.text = notifications.items[indexPath.row] as String
+        cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
+        
         println("adding row: " + cell.text)
         return cell
     }
