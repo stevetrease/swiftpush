@@ -9,7 +9,7 @@
 import Foundation
 
 // A single, global instance of this class
-var notifications = NotificationData(item: ["Initial item"])
+var notifications = NotificationData(item: [])
 
 class NotificationData: NSObject {
     var items: String[]

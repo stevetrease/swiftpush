@@ -352,6 +352,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Steve Trease (DB3DDPLGYS)";
 				INFOPLIST_FILE = "Swift Push/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "FB33D6DC-00D6-4873-A472-313461F14A56";
@@ -366,6 +367,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Steve Trease (DB3DDPLGYS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Steve Trease (DB3DDPLGYS)";
 				INFOPLIST_FILE = "Swift Push/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "FB33D6DC-00D6-4873-A472-313461F14A56";
