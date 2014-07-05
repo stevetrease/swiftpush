@@ -8,17 +8,24 @@
 
 import UIKit
 
-// var tableView: UITableView = UITableView()
-
-
 
 class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var tableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // println("viewDidLoad")
-        println(notifications.items.count)
+        println("viewDidLoad")
+        
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        let mainQueue = NSOperationQueue.mainQueue()
+        
+        var observer = notificationCenter.addObserverForName("dataChanged", object: nil, queue: mainQueue) { _ in
+            println("notification received")
+            self.tableView.reloadData()
+         }
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,7 +36,6 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         return notifications.items.count
     }
-    
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "MyTestCell")

@@ -13,8 +13,10 @@ import Foundation
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
-
-
+    
+    var tableView: UITableView!
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
         
@@ -50,12 +52,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("Failed to recieve device token")
         println( error.localizedDescription )
     }
-    func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary ) {
+    func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary) {
+        println(userInfo)
         var t1: AnyObject! = userInfo.objectForKey("aps")
         var message = t1.objectForKey("alert") as String
         notifications.items.append(message)
-        // tableView.reloadData()
-        println ("Push message received: \(message)")
+        println ("Push message received by AppDeligate: \(message)")
+        
+        let center = NSNotificationCenter.defaultCenter()
+        center.postNotificationName("dataChanged", object: self)
     }
 
     
@@ -66,19 +71,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.\
+        println("applicationDidEnterBackground")
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        println("applicationWillEnterForeground")
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        println("applicationDidBecomeActive")
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        println("applicationWillTerminate")
     }
 
 
