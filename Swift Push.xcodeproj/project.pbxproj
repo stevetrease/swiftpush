@@ -13,7 +13,6 @@
 		AAB440DC19631FAF004F8EA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB440DB19631FAF004F8EA2 /* ViewController.swift */; };
 		AAB440DF19631FAF004F8EA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB440DD19631FAF004F8EA2 /* Main.storyboard */; };
 		AAB440E119631FAF004F8EA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAB440E019631FAF004F8EA2 /* Images.xcassets */; };
-		AAB440ED19631FAF004F8EA2 /* Swift_PushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB440EC19631FAF004F8EA2 /* Swift_PushTests.swift */; };
 		AAB440F71963232E004F8EA2 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB440F61963232E004F8EA2 /* NotificationCenter.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,8 +50,6 @@
 		AAB440DE19631FAF004F8EA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AAB440E019631FAF004F8EA2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AAB440E619631FAF004F8EA2 /* Swift PushTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift PushTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAB440EB19631FAF004F8EA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AAB440EC19631FAF004F8EA2 /* Swift_PushTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_PushTests.swift; sourceTree = "<group>"; };
 		AAB440F61963232E004F8EA2 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -81,7 +78,6 @@
 				AA6E25091966F0E800990670 /* Settings.bundle */,
 				AAB440F61963232E004F8EA2 /* NotificationCenter.framework */,
 				AAB440D619631FAF004F8EA2 /* Swift Push */,
-				AAB440E919631FAF004F8EA2 /* Swift PushTests */,
 				AAB440D519631FAF004F8EA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,23 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				AAB440D819631FAF004F8EA2 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AAB440E919631FAF004F8EA2 /* Swift PushTests */ = {
-			isa = PBXGroup;
-			children = (
-				AAB440EC19631FAF004F8EA2 /* Swift_PushTests.swift */,
-				AAB440EA19631FAF004F8EA2 /* Supporting Files */,
-			);
-			path = "Swift PushTests";
-			sourceTree = "<group>";
-		};
-		AAB440EA19631FAF004F8EA2 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AAB440EB19631FAF004F8EA2 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -250,7 +229,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAB440ED19631FAF004F8EA2 /* Swift_PushTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
