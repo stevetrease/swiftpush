@@ -39,14 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
-        //var existingToken: AnyObject? = // NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
-        //if ( existingToken as String == deviceToken.description as String ) {
-        //    println("device token unchanged")
-        //} else {
+        var existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
+        if ( existingToken as String == deviceToken.description as String ) {
+            println("device token unchanged")
+        } else {
             println("device token changed and saved")
             NSUserDefaults.standardUserDefaults().setObject(deviceToken.description, forKey:"deviceToken")
             NSUserDefaults.standardUserDefaults().synchronize()
-        //}
+        }
         println(deviceToken.description)
         println()
 
