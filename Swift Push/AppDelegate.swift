@@ -39,14 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
-        var existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
-        if ( existingToken as String == deviceToken.description as String ) {
-            println("device token unchanged")
-        } else {
+        //  existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
+        // if ( existingToken as String == deviceToken.description as String ) {
+        //     println("device token unchanged")
+        // } else {
             println("device token changed and saved")
             NSUserDefaults.standardUserDefaults().setObject(deviceToken.description, forKey:"deviceToken")
             NSUserDefaults.standardUserDefaults().synchronize()
-        }
+        // }
         println(deviceToken.description)
         println()
 
@@ -55,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("Failed to recieve device token")
         println( error.localizedDescription )
     }
+    // func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary, completionHandler: (() -> Void)!) {
+    // func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary, completionHandler: (() -> Void)) {
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary) {
         println(userInfo)
         var t1: AnyObject! = userInfo.objectForKey("aps")
@@ -66,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = NSNotificationCenter.defaultCenter()
         center.postNotificationName("dataChanged", object: self)
     }
+
 
 
     
