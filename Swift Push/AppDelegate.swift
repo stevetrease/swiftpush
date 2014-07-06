@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings( settings )
         application.registerForRemoteNotifications()
 
+        // set default device token preference
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "deviceToken")
         return true
     }
 
