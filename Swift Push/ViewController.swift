@@ -22,10 +22,9 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let mainQueue = NSOperationQueue.mainQueue()
         
-        var observer = notificationCenter.addObserverForName("dataChanged", object: nil, queue: mainQueue) { _ in
-            println("notification received")
-            self.tableView.reloadData()
-         }
+        var observer = notificationCenter.addObserverForName("dataChanged",object:nil, queue: mainQueue) { _ in
+           self.tableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
