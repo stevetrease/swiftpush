@@ -21,6 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         println("didFinishLaunchingWithOptions")
+        
+        switch (application.applicationState) {
+            case UIApplicationState.Active:
+                println ("active")
+            case UIApplicationState.Inactive:
+                println ("inactive")
+            case UIApplicationState.Background:
+                println ("Background")
+            default:
+                println("unknown application state")
+        }
+        
         // println(notifications.items.count)
         
         var types: UIUserNotificationType = UIUserNotificationType.Badge |
@@ -55,9 +67,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("Failed to recieve device token")
         println( error.localizedDescription )
     }
+    
+    func completionHandler (UserInfo:NSDictionary) -> Void {
+        println("handler called")
+        return
+    }
+    
     // func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary, completionHandler: (() -> Void)!) {
     // func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary, completionHandler: (() -> Void)) {
+    //func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary) {
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary) {
+    
         println(userInfo)
         var t1: AnyObject! = userInfo.objectForKey("aps")
         var message = t1.objectForKey("alert") as String
@@ -65,8 +85,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notifications.items.insert(message, atIndex: 0)
         println ("Push message received by AppDeligate: \(message)")
         
+
         let center = NSNotificationCenter.defaultCenter()
         center.postNotificationName("dataChanged", object: self)
+        completionHandler(userInfo)
     }
 
 

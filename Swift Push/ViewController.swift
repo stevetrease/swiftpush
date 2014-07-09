@@ -42,21 +42,20 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "MyTestCell")
         
-        let formatter:NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "dd MMM YYYY HH:MM:SS"
-        var dateString = formatter.stringFromDate(NSDate())
+        // let formatter:NSDateFormatter = NSDateFormatter()
+        // formatter.dateFormat = "dd MMM YYYY HH:MM:SS"
+        // var dateString = formatter.stringFromDate(NSDate())
         
         cell.textLabel.numberOfLines = 1        // don't line wrap
-        cell.detailTextLabel.numberOfLines = 1  //line wrap detail cell
+        cell.detailTextLabel.numberOfLines = 0  //line wrap detail cell
         
         cell.textLabel.text = notifications.items[indexPath.row] as String
-        cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
-        
-        // if (indexPath.row % 2 == 0 ) {
-        //     cell.backgroundColor = UIColor.redColor()
-        // } else {
-        //     cell.backgroundColor = UIColor.purpleColor()
-        // }
+        // cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
+        cell.detailTextLabel.text = notifications.items[indexPath.row] as String
+
+        if (indexPath.row % 2 == 0 ) {
+            cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+        }
         
         println("adding row: " + cell.textLabel.text)
         return cell
@@ -70,6 +69,13 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         notifications.items.removeAtIndex(indexPath.row)
         println("removing row: ", indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+        
+//        var cellsNeedingUpdate = tableView.visibleCells()
+//         for (cell in cellsNeedingUpdate) {
+//
+//         }
+
+        
     }
     
 }
