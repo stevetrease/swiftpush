@@ -43,10 +43,10 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         formatter.dateFormat = "dd MMM YYYY HH:MM:SS"
         var dateString = formatter.stringFromDate(NSDate())
         
-        cell.text = notifications.items[indexPath.row] as String
+        cell.textLabel.text = notifications.items[indexPath.row] as String
         cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
         
-        println("adding row: " + cell.text)
+        println("adding row: " + cell.textLabel.text)
         return cell
     }
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
