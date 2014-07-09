@@ -12,9 +12,9 @@ import Foundation
 var notifications = NotificationData(item: [])
 
 class NotificationData: NSObject {
-    var items: String[]
+    var items: [String]
     
-    init (item: String[]) {
+    init (item: [String]) {
         self.items = item
     }
 }
