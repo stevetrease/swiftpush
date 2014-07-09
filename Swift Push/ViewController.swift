@@ -25,6 +25,9 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         var observer = notificationCenter.addObserverForName("dataChanged",object:nil, queue: mainQueue) { _ in
            self.tableView.reloadData()
         }
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 30.0
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,8 +46,17 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         formatter.dateFormat = "dd MMM YYYY HH:MM:SS"
         var dateString = formatter.stringFromDate(NSDate())
         
+        cell.textLabel.numberOfLines = 1        // don't line wrap
+        cell.detailTextLabel.numberOfLines = 1  //line wrap detail cell
+        
         cell.textLabel.text = notifications.items[indexPath.row] as String
         cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
+        
+        // if (indexPath.row % 2 == 0 ) {
+        //     cell.backgroundColor = UIColor.redColor()
+        // } else {
+        //     cell.backgroundColor = UIColor.purpleColor()
+        // }
         
         println("adding row: " + cell.textLabel.text)
         return cell
