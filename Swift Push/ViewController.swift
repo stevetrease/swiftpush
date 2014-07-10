@@ -17,7 +17,6 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // println("viewDidLoad")
-        println("viewDidLoad")
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let mainQueue = NSOperationQueue.mainQueue()
@@ -57,7 +56,7 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         }
         
-        println("adding row: " + cell.textLabel.text)
+        // println("rendering row: \(indexPath.row):" + cell.textLabel.text)
         return cell
     }
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
