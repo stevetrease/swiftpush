@@ -35,7 +35,7 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return notifications.items.count
+        return notifications.count
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
@@ -48,15 +48,14 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.textLabel.numberOfLines = 1        // don't line wrap
         cell.detailTextLabel.numberOfLines = 0  //line wrap detail cell
         
-        cell.textLabel.text = notifications.items[indexPath.row] as String
+        cell.textLabel.text = notifications[indexPath.row].alert as String
         // cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
-        cell.detailTextLabel.text = notifications.items[indexPath.row] as String
+        cell.detailTextLabel.text = notifications[indexPath.row].payload as String
 
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         }
         
-        // println("rendering row: \(indexPath.row):" + cell.textLabel.text)
         return cell
     }
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
@@ -65,16 +64,9 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!)
     {
-        notifications.items.removeAtIndex(indexPath.row)
+        notifications.removeAtIndex(indexPath.row)
         println("removing row: ", indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
-        
-//        var cellsNeedingUpdate = tableView.visibleCells()
-//         for (cell in cellsNeedingUpdate) {
-//
-//         }
-
-        
     }
     
 }

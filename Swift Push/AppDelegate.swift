@@ -21,7 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         println("didFinishLaunchingWithOptions")
-                
+        
+        if launchOptions.getLogicValue() {
+            println("launched with lauchOptions")
+        }
+        
+        println("launchOptions")
+        println(launchOptions)
+        println("---")
+        
+        // if launchOptions.UIApplicationLaunchOptionsRemoteNotificationKey {
+            println("LaunchOptionsRemoteNotificationKey")
+        //} else {
+            println("no LaunchOptionsRemoteNotificationKey")
+        // }
         // notifications.loadMe ()
         
         switch (application.applicationState) {
@@ -30,16 +43,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case UIApplicationState.Inactive:
                 println ("inactive")
             case UIApplicationState.Background:
-                println ("Background")
+                println ("background")
             default:
                 println("unknown application state")
         }
         
-        // println(notifications.items.count)
-        
         var types: UIUserNotificationType = UIUserNotificationType.Badge |
-            UIUserNotificationType.Alert |
-            UIUserNotificationType.Sound
+                                            UIUserNotificationType.Alert |
+                                            UIUserNotificationType.Sound
         
         var settings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: types, categories: nil )
         
@@ -53,13 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
-        //  existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
-        // if ( existingToken as String == deviceToken.description as String ) {
-        //     println("device token unchanged")
-        // } else {
+        //let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
+        //if ( existingToken as String == deviceToken.description as String ) {
+             //println("device token unchanged")
+        //} else {
             println("device token changed and saved")
             NSUserDefaults.standardUserDefaults().setObject(deviceToken.description, forKey:"deviceToken")
-            NSUserDefaults.standardUserDefaults().synchronize()
+            // NSUserDefaults.standardUserDefaults().synchronize()
         // }
         println(deviceToken.description)
         println()
@@ -70,24 +81,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println( error.localizedDescription )
     }
     
-    
-    // func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary, completionHandler: (() -> Void)!) {
-    // func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary, completionHandler: (() -> Void)) {
-    //func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary) {
-    
-    // func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary) {
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary!, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
-        var t1: AnyObject! = userInfo.objectForKey("aps")
-        var message = t1.objectForKey("alert") as String
-        notifications.items.append(message)
-        notifications.items.insert(message, atIndex: 0)
-        
-        println ("Push message received by AppDeligate: \(message)")
-        
+        // println ("Push message received by AppDeligate: \(userInfo)")
 
-        // let userDefaults = NSUserDefaults.standardUserDefaults()
-        // userDefaults.setObject(notifications, forKey: "notificationData")
-    
+        var t1: AnyObject! = userInfo.objectForKey("aps")
+
+        var alert = t1.objectForKey("alert") as String
+        // var payload = t1.objectForKey("payload") as String
+        
+        var item = NotificationData()
+        item.alert = alert
+        // item.payload = "payload text just here"
+        
+        notifications.insert(item, atIndex: 0)
+        
         let center = NSNotificationCenter.defaultCenter()
         center.postNotificationName("dataChanged", object: self)
         
@@ -97,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case UIApplicationState.Inactive:
             println ("inactive")
         case UIApplicationState.Background:
-            println ("Background")
+            println ("background")
         default:
             println("unknown application state")
         }

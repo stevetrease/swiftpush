@@ -9,24 +9,11 @@
 import Foundation
 
 // A single, global instance of this class
-var notifications = NotificationData(item: [])
+var notifications = [NotificationData]()
 
-class NotificationData: NSObject {
-    var items: [String]
-    
-    init (item: [String]) {
-        self.items = item
-    }
-    
- //    func saveMe () -> Void {
- //        println("saveMe")
- //        let userDefaults = NSUserDefaults.standardUserDefaults()
- //        userDefaults.setObject(items, forKey: "notificationData")
- //    }
- //    func loadMe () -> Void {
- //        println("loadMe")
-  //       if let userDefaults = NSUserDefaults.standardUserDefaults() {
-  //          items: AnyObject = userDefaults.objectForKey("notificationData")
-// }
-    //}
+
+class NotificationData {
+    var alert: String = ""
+    var payload: String = ""
+    var receivedAt = NSDate()
 }
