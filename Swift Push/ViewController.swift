@@ -45,7 +45,7 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         // formatter.dateFormat = "dd MMM YYYY HH:MM:SS"
         // var dateString = formatter.stringFromDate(NSDate())
         
-        cell.textLabel.numberOfLines = 1        // don't line wrap
+        cell.textLabel.numberOfLines = 0        // don't line wrap
         cell.detailTextLabel.numberOfLines = 0  //line wrap detail cell
         
         cell.textLabel.text = notifications[indexPath.row].alert as String
