@@ -92,10 +92,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         item.alert = alert
         // item.payload = "payload text just here"
         
+        // add the idem to the data list
         notifications.insert(item, atIndex: 0)
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        // userDefaults.setObject(notifications, forKey: "notifications")
         
+        // notify tableview to refresh
         let center = NSNotificationCenter.defaultCenter()
         center.postNotificationName("dataChanged", object: self)
         
