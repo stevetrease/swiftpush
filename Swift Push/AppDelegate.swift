@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
@@ -57,21 +58,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings( settings )
         application.registerForRemoteNotifications()
 
-        // set default device token preference
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "deviceToken")
         return true
     }
 
     
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
-        //let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
-        //if ( existingToken as String == deviceToken.description as String ) {
-             //println("device token unchanged")
-        //} else {
+        let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
+        if ( existingToken as String == deviceToken.description as String ) {
+             println("device token unchanged")
+        } else {
             println("device token changed and saved")
-            NSUserDefaults.standardUserDefaults().setObject(deviceToken.description, forKey:"deviceToken")
+            NSUserDefaults.standardUserDefaults().setObject(deviceToken.description as String, forKey:"deviceToken")
             // NSUserDefaults.standardUserDefaults().synchronize()
-        // }
+        }
         println(deviceToken.description)
         println()
 
@@ -94,6 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // item.payload = "payload text just here"
         
         notifications.insert(item, atIndex: 0)
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        // userDefaults.setObject(notifications, forKey: "notifications")
         
         let center = NSNotificationCenter.defaultCenter()
         center.postNotificationName("dataChanged", object: self)
