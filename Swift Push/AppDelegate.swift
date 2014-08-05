@@ -21,32 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
         
-        println("didFinishLaunchingWithOptions")
-        
-        if launchOptions.getLogicValue() {
-            println("launched with lauchOptions")
-        }
-        
-        println("launchOptions")
-        println(launchOptions)
-        println("---")
-        
-        // if launchOptions.UIApplicationLaunchOptionsRemoteNotificationKey {
-            println("LaunchOptionsRemoteNotificationKey")
-        //} else {
-            println("no LaunchOptionsRemoteNotificationKey")
-        // }
-        // notifications.loadMe ()
-        
-        switch (application.applicationState) {
+       switch (application.applicationState) {
             case UIApplicationState.Active:
-                println ("active")
+                println ("didFinishLaunchingWithOptions - active")
             case UIApplicationState.Inactive:
-                println ("inactive")
+                println ("didFinishLaunchingWithOptions - inactive")
             case UIApplicationState.Background:
-                println ("background")
+                println ("didFinishLaunchingWithOptions - background")
             default:
-                println("unknown application state")
+                println("didFinishLaunchingWithOptions - unknown application state")
         }
         
         var types: UIUserNotificationType = UIUserNotificationType.Badge |
@@ -82,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary!, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
         // println ("Push message received by AppDeligate: \(userInfo)")
-
+ 
         var t1: AnyObject! = userInfo.objectForKey("aps")
 
         var alert = t1.objectForKey("alert") as String

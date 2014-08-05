@@ -16,32 +16,7 @@
 		AAB440E119631FAF004F8EA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAB440E019631FAF004F8EA2 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		AAB440E719631FAF004F8EA2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AAB440CC19631FAF004F8EA2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AAB440D319631FAF004F8EA2;
-			remoteInfo = "Swift Push";
-		};
-		AABE52F119634250002D010D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AAB440CC19631FAF004F8EA2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AAB440D319631FAF004F8EA2;
-			remoteInfo = "Swift Push";
-		};
-		AABE52F319634250002D010D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AAB440CC19631FAF004F8EA2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AAB440D319631FAF004F8EA2;
-			remoteInfo = "Swift Push";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		AA13732B196D8E6000BC04DC /* Swift Push-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swift Push-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA5DC7451965EC2E0097FAA9 /* NotificationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationData.swift; sourceTree = "<group>"; };
 		AA6E25091966F0E800990670 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		AAB440D419631FAF004F8EA2 /* Swift Push.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Push.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,7 +25,6 @@
 		AAB440DB19631FAF004F8EA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AAB440DE19631FAF004F8EA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AAB440E019631FAF004F8EA2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AAB440E619631FAF004F8EA2 /* Swift PushTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift PushTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB440F61963232E004F8EA2 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -60,13 +34,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA25D74719696616000EFF2B /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAB440E319631FAF004F8EA2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +47,6 @@
 				AAB440F61963232E004F8EA2 /* NotificationCenter.framework */,
 				AAB440D619631FAF004F8EA2 /* Swift Push */,
 				AAB440D519631FAF004F8EA2 /* Products */,
-				AA13732B196D8E6000BC04DC /* Swift Push-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				AAB440D419631FAF004F8EA2 /* Swift Push.app */,
-				AAB440E619631FAF004F8EA2 /* Swift PushTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,26 +99,6 @@
 			productReference = AAB440D419631FAF004F8EA2 /* Swift Push.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AAB440E519631FAF004F8EA2 /* Swift PushTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AAB440F319631FAF004F8EA2 /* Build configuration list for PBXNativeTarget "Swift PushTests" */;
-			buildPhases = (
-				AAB440E219631FAF004F8EA2 /* Sources */,
-				AAB440E319631FAF004F8EA2 /* Frameworks */,
-				AAB440E419631FAF004F8EA2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AAB440E819631FAF004F8EA2 /* PBXTargetDependency */,
-				AABE52F219634250002D010D /* PBXTargetDependency */,
-				AABE52F419634250002D010D /* PBXTargetDependency */,
-			);
-			name = "Swift PushTests";
-			productName = "Swift PushTests";
-			productReference = AAB440E619631FAF004F8EA2 /* Swift PushTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -172,10 +117,6 @@
 							};
 						};
 					};
-					AAB440E519631FAF004F8EA2 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = AAB440D319631FAF004F8EA2;
-					};
 				};
 			};
 			buildConfigurationList = AAB440CF19631FAF004F8EA2 /* Build configuration list for PBXProject "Swift Push" */;
@@ -192,7 +133,6 @@
 			projectRoot = "";
 			targets = (
 				AAB440D319631FAF004F8EA2 /* Swift Push */,
-				AAB440E519631FAF004F8EA2 /* Swift PushTests */,
 			);
 		};
 /* End PBXProject section */
@@ -205,13 +145,6 @@
 				AAB440DF19631FAF004F8EA2 /* Main.storyboard in Resources */,
 				AA6E250A1966F0E800990670 /* Settings.bundle in Resources */,
 				AAB440E119631FAF004F8EA2 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAB440E419631FAF004F8EA2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,32 +161,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AAB440E219631FAF004F8EA2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AAB440E819631FAF004F8EA2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AAB440D319631FAF004F8EA2 /* Swift Push */;
-			targetProxy = AAB440E719631FAF004F8EA2 /* PBXContainerItemProxy */;
-		};
-		AABE52F219634250002D010D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AAB440D319631FAF004F8EA2 /* Swift Push */;
-			targetProxy = AABE52F119634250002D010D /* PBXContainerItemProxy */;
-		};
-		AABE52F419634250002D010D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AAB440D319631FAF004F8EA2 /* Swift Push */;
-			targetProxy = AABE52F319634250002D010D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AAB440DD19631FAF004F8EA2 /* Main.storyboard */ = {
@@ -387,42 +295,6 @@
 			};
 			name = Release;
 		};
-		AAB440F419631FAF004F8EA2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Swift Push.app/Swift Push";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Swift PushTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		AAB440F519631FAF004F8EA2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Swift Push.app/Swift Push";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Swift PushTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -440,15 +312,6 @@
 			buildConfigurations = (
 				AAB440F119631FAF004F8EA2 /* Debug */,
 				AAB440F219631FAF004F8EA2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AAB440F319631FAF004F8EA2 /* Build configuration list for PBXNativeTarget "Swift PushTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AAB440F419631FAF004F8EA2 /* Debug */,
-				AAB440F519631FAF004F8EA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
