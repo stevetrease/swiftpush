@@ -10,6 +10,7 @@
 		AA25D74719696616000EFF2B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB440F61963232E004F8EA2 /* NotificationCenter.framework */; };
 		AA5DC7461965EC2E0097FAA9 /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5DC7451965EC2E0097FAA9 /* NotificationData.swift */; };
 		AA6E250A1966F0E800990670 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA6E25091966F0E800990670 /* Settings.bundle */; };
+		AA9BFC271993C0FE00DC53CF /* Swift Push Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA9BFC251993C0FD00DC53CF /* Swift Push Model.xcdatamodeld */; };
 		AAB440DA19631FAF004F8EA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB440D919631FAF004F8EA2 /* AppDelegate.swift */; };
 		AAB440DC19631FAF004F8EA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB440DB19631FAF004F8EA2 /* ViewController.swift */; };
 		AAB440DF19631FAF004F8EA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAB440DD19631FAF004F8EA2 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		AA5DC7451965EC2E0097FAA9 /* NotificationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationData.swift; sourceTree = "<group>"; };
 		AA6E25091966F0E800990670 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		AA9BFC261993C0FE00DC53CF /* Swift Push Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Swift Push Model.xcdatamodel"; sourceTree = "<group>"; };
 		AAB440D419631FAF004F8EA2 /* Swift Push.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Push.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB440D819631FAF004F8EA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAB440D919631FAF004F8EA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 		AAB440CB19631FAF004F8EA2 = {
 			isa = PBXGroup;
 			children = (
+				AA9BFC251993C0FD00DC53CF /* Swift Push Model.xcdatamodeld */,
 				AA6E25091966F0E800990670 /* Settings.bundle */,
 				AAB440F61963232E004F8EA2 /* NotificationCenter.framework */,
 				AAB440D619631FAF004F8EA2 /* Swift Push */,
@@ -115,6 +118,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -158,6 +164,7 @@
 				AAB440DC19631FAF004F8EA2 /* ViewController.swift in Sources */,
 				AA5DC7461965EC2E0097FAA9 /* NotificationData.swift in Sources */,
 				AAB440DA19631FAF004F8EA2 /* AppDelegate.swift in Sources */,
+				AA9BFC271993C0FE00DC53CF /* Swift Push Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,15 +269,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Swift Push/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8E2EAB2C-3CCB-489D-AE87-2C12F929B292";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swift Push-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -282,15 +289,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Swift Push/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8E2EAB2C-3CCB-489D-AE87-2C12F929B292";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swift Push-Bridging-Header.h";
 			};
 			name = Release;
@@ -317,6 +324,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AA9BFC251993C0FD00DC53CF /* Swift Push Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AA9BFC261993C0FE00DC53CF /* Swift Push Model.xcdatamodel */,
+			);
+			currentVersion = AA9BFC261993C0FE00DC53CF /* Swift Push Model.xcdatamodel */;
+			path = "Swift Push Model.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AAB440CC19631FAF004F8EA2 /* Project object */;
 }

@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case UIApplicationState.Background:
                 println ("didFinishLaunchingWithOptions - background")
             default:
-                println("didFinishLaunchingWithOptions - unknown application state")
+                println ("didFinishLaunchingWithOptions - unknown application state")
         }
         
         var types: UIUserNotificationType = UIUserNotificationType.Badge |
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary!, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
-        // println ("Push message received by AppDeligate: \(userInfo)")
+        println ("Push message received by AppDeligate: \(userInfo)")
  
         var t1: AnyObject! = userInfo.objectForKey("aps")
 
@@ -97,7 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -124,7 +123,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         println("applicationWillTerminate")
     }
-
-
 }
-

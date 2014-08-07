@@ -9,6 +9,7 @@
 import Foundation
 
 // A single, global instance of this class
+
 var notifications = [NotificationData]()
 
 
