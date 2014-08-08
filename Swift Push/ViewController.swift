@@ -27,6 +27,10 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 30.0
+        
+        self.tableView.layer.cornerRadius = 10.0
+        self.tableView.layer.borderWidth = 5.0
+        self.tableView.layer.masksToBounds = true
     }
     
     override func didReceiveMemoryWarning() {
