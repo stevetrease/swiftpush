@@ -38,6 +38,7 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         // Dispose of any resources that can be recreated.
     }
     
+    
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
     }
@@ -48,6 +49,10 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         // let formatter:NSDateFormatter = NSDateFormatter()
         // formatter.dateFormat = "dd MMM YYYY HH:MM:SS"
         // var dateString = formatter.stringFromDate(NSDate())
+        
+        cell.layer.cornerRadius = 10.0
+        cell.layer.borderWidth = 1.0
+        cell.layer.masksToBounds = true
         
         cell.textLabel.numberOfLines = 0        // don't line wrap
         cell.detailTextLabel.numberOfLines = 0  //line wrap detail cell
