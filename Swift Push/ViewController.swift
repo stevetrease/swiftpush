@@ -29,7 +29,7 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         self.tableView.estimatedRowHeight = 30.0
         
         self.tableView.layer.cornerRadius = 10.0
-        self.tableView.layer.borderWidth = 1.0
+        // elf.tableView.layer.borderWidth = 1.0
         self.tableView.layer.masksToBounds = true
     }
     
@@ -51,7 +51,7 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         // var dateString = formatter.stringFromDate(NSDate())
         
         cell.layer.cornerRadius = 10.0
-        cell.layer.borderWidth = 1.0
+        // cell.layer.borderWidth = 1.0
         cell.layer.masksToBounds = true
         
         cell.textLabel.numberOfLines = 0        // don't line wrap
