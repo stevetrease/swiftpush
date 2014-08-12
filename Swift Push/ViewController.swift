@@ -54,8 +54,8 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         // cell.layer.borderWidth = 1.0
         cell.layer.masksToBounds = true
         
-        cell.textLabel.numberOfLines = 0        // don't line wrap
-        cell.detailTextLabel.numberOfLines = 0  //line wrap detail cell
+        cell.textLabel.numberOfLines = 1        // don't line wrap
+        cell.detailTextLabel.numberOfLines = 0  // line wrap detail cell
         
         cell.textLabel.text = notifications[indexPath.row].alert as String
         // cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String

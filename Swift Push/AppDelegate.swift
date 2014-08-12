@@ -64,16 +64,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary!, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
-        // println ("Push message received by AppDeligate: \(userInfo)")
+        println ("Push message received by AppDeligate: \(userInfo)")
  
         var t1: AnyObject! = userInfo.objectForKey("aps")
 
         var alert = t1.objectForKey("alert") as String
-        // var payload = t1.objectForKey("payload") as String
+        var payload = userInfo.objectForKey("payload") as String
         
         var item = NotificationData()
         item.alert = alert
-        // item.payload = "payload text just here"
+        item.payload = payload
         
         // add the idem to the data list
         notifications.insert(item, atIndex: 0)
@@ -84,13 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         switch (application.applicationState) {
         case UIApplicationState.Active:
-            println ("active")
+            println ("notification received whilst active")
         case UIApplicationState.Inactive:
-            println ("inactive")
+            println ("notification received whilst inactive")
         case UIApplicationState.Background:
-            println ("background")
+            println ("notification received whilst in background")
         default:
-            println("unknown application state")
+            println("notification received with unknown application state")
         }
         completionHandler(UIBackgroundFetchResult.NewData)
 
