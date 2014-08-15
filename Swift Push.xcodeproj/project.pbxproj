@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AA25D74719696616000EFF2B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB440F61963232E004F8EA2 /* NotificationCenter.framework */; };
+		AA3A6E57199BB9AF00189A6C /* NotificationsCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA3A6E55199BB9AF00189A6C /* NotificationsCoreData.xcdatamodeld */; };
+		AA3A6E5B199BBC3000189A6C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A6E5A199BBC3000189A6C /* Notifications.swift */; };
 		AA5DC7461965EC2E0097FAA9 /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5DC7451965EC2E0097FAA9 /* NotificationData.swift */; };
 		AA6E250A1966F0E800990670 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA6E25091966F0E800990670 /* Settings.bundle */; };
 		AAB440DA19631FAF004F8EA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB440D919631FAF004F8EA2 /* AppDelegate.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA3A6E56199BB9AF00189A6C /* NotificationsCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotificationsCoreData.xcdatamodel; sourceTree = "<group>"; };
+		AA3A6E5A199BBC3000189A6C /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		AA5DC7451965EC2E0097FAA9 /* NotificationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationData.swift; sourceTree = "<group>"; };
 		AA6E25091966F0E800990670 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		AAB440D419631FAF004F8EA2 /* Swift Push.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Push.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +69,8 @@
 				AA5DC7451965EC2E0097FAA9 /* NotificationData.swift */,
 				AAB440DB19631FAF004F8EA2 /* ViewController.swift */,
 				AAB440DD19631FAF004F8EA2 /* Main.storyboard */,
+				AA3A6E55199BB9AF00189A6C /* NotificationsCoreData.xcdatamodeld */,
+				AA3A6E5A199BBC3000189A6C /* Notifications.swift */,
 				AAB440E019631FAF004F8EA2 /* Images.xcassets */,
 				AAB440D719631FAF004F8EA2 /* Supporting Files */,
 			);
@@ -155,9 +161,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3A6E5B199BBC3000189A6C /* Notifications.swift in Sources */,
 				AAB440DC19631FAF004F8EA2 /* ViewController.swift in Sources */,
 				AA5DC7461965EC2E0097FAA9 /* NotificationData.swift in Sources */,
 				AAB440DA19631FAF004F8EA2 /* AppDelegate.swift in Sources */,
+				AA3A6E57199BB9AF00189A6C /* NotificationsCoreData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +327,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AA3A6E55199BB9AF00189A6C /* NotificationsCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AA3A6E56199BB9AF00189A6C /* NotificationsCoreData.xcdatamodel */,
+			);
+			currentVersion = AA3A6E56199BB9AF00189A6C /* NotificationsCoreData.xcdatamodel */;
+			path = NotificationsCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AAB440CC19631FAF004F8EA2 /* Project object */;
 }
