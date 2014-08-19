@@ -26,10 +26,10 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 30.0
+        self.tableView.estimatedRowHeight = 50.0
         
         self.tableView.layer.cornerRadius = 10.0
-        // elf.tableView.layer.borderWidth = 1.0
+        // self.tableView.layer.borderWidth = 1.0
         self.tableView.layer.masksToBounds = true
     }
     
@@ -54,7 +54,7 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         // cell.layer.borderWidth = 1.0
         cell.layer.masksToBounds = true
         
-        cell.textLabel.numberOfLines = 1        // don't line wrap
+        cell.textLabel.numberOfLines = 0        // don't line wrap
         cell.detailTextLabel.numberOfLines = 0  // line wrap detail cell
         
         cell.textLabel.text = notifications[indexPath.row].alert as String
