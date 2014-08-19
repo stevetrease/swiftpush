@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case UIApplicationState.Background:
                 println ("didFinishLaunchingWithOptions - background")
             default:
-                println("didFinishLaunchingWithOptions - unknown application state")
+                println ("didFinishLaunchingWithOptions - unknown application state")
         }
         
         var types: UIUserNotificationType = UIUserNotificationType.Badge |
@@ -61,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         println(deviceToken.description)
         println()
-
     }
     
     
