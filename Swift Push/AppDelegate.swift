@@ -82,15 +82,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         item.alert = alert
         item.payload = payload
         
-
-        // let notificationEntity = NSEntityDescription.entityForName("Notifications", inManagedObjectContext: managedContext)
-        // let newNotification = Notifications(entity: notificationEntity, insertIntoManagedObjectContext: managedContext)
-        
-        // newNotification.alert = alert
-        // newNotification.payload = payload
-        
-        // add the idem to the data list
         notifications.insert(item, atIndex: 0)
+        if (notifications.count > 10) {
+            notifications.removeLast()
+        }
         
         // notify tableview to refresh
         let center = NSNotificationCenter.defaultCenter()

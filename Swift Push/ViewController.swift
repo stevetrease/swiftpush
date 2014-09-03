@@ -9,9 +9,9 @@
 import UIKit
 
 
-class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController:  UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
-    @IBOutlet var tableView: UITableView!
+    var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +26,9 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 50.0
+        self.tableView.estimatedRowHeight = 20.0
         
-        self.tableView.layer.cornerRadius = 10.0
-        // self.tableView.layer.borderWidth = 1.0
+        self.tableView.layer.cornerRadius = 5.0
         self.tableView.layer.masksToBounds = true
     }
     
@@ -38,28 +37,21 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         // Dispose of any resources that can be recreated.
     }
     
-    
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
     }
-    
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "MyTestCell")
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
         
-        // let formatter:NSDateFormatter = NSDateFormatter()
-        // formatter.dateFormat = "dd MMM YYYY HH:MM:SS"
-        // var dateString = formatter.stringFromDate(NSDate())
-        
-        cell.layer.cornerRadius = 10.0
-        // cell.layer.borderWidth = 1.0
+        cell.layer.cornerRadius = 5.0
         cell.layer.masksToBounds = true
         
-        cell.textLabel.numberOfLines = 0        // don't line wrap
-        cell.detailTextLabel.numberOfLines = 0  // line wrap detail cell
+        cell.textLabel?.numberOfLines = 0
+        cell.detailTextLabel?.numberOfLines = 0
         
-        cell.textLabel.text = notifications[indexPath.row].alert as String
+        cell.textLabel?.text = notifications[indexPath.row].alert as String
         // cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
-        cell.detailTextLabel.text = notifications[indexPath.row].payload as String
+        cell.detailTextLabel?.text = notifications[indexPath.row].payload as String
 
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
@@ -77,5 +69,4 @@ class ViewController:  UIViewController, UITableViewDelegate, UITableViewDataSou
         println("removing row: ", indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
     }
-    
 }
