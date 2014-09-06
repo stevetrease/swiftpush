@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA70F4D119BB95210051DBD5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA70F4D019BB95210051DBD5 /* Settings.bundle */; };
 		AAD81F5819BB63E600B08E83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD81F5719BB63E600B08E83 /* AppDelegate.swift */; };
 		AAD81F5B19BB63E600B08E83 /* Swift_Push_3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAD81F5919BB63E600B08E83 /* Swift_Push_3.xcdatamodeld */; };
 		AAD81F6019BB63E600B08E83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F5E19BB63E600B08E83 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA70F4D019BB95210051DBD5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		AAD81F5219BB63E600B08E83 /* Swift Push 3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Push 3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD81F5619BB63E600B08E83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAD81F5719BB63E600B08E83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				AAD81F5519BB63E600B08E83 /* Supporting Files */,
 				AAD81F7919BB655D00B08E83 /* NotificationsTableViewController.swift */,
 				AAD81F7B19BB65C800B08E83 /* NotificationData.swift */,
+				AA70F4D019BB95210051DBD5 /* Settings.bundle */,
 			);
 			path = "Swift Push 3";
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAD81F6019BB63E600B08E83 /* Main.storyboard in Resources */,
+				AA70F4D119BB95210051DBD5 /* Settings.bundle in Resources */,
 				AAD81F6219BB63E600B08E83 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +414,7 @@
 				AAD81F7319BB63E600B08E83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AAD81F7419BB63E600B08E83 /* Build configuration list for PBXNativeTarget "Swift Push 3Tests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +423,7 @@
 				AAD81F7619BB63E600B08E83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
