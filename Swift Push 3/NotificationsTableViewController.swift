@@ -33,8 +33,9 @@ class NotificationsTableViewController: UITableViewController {
         
         // self.tableView.layer.cornerRadius = 5.0
         // self.tableView.layer.masksToBounds = true
-}
-
+        
+        // self.view.backgroundColor = UIColor(red: 0.95, green: 0, blue: 0, alpha: 1.0)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
