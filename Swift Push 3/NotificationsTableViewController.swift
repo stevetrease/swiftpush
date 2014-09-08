@@ -31,9 +31,9 @@ class NotificationsTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 20.0
         
-        self.tableView.layer.cornerRadius = 5.0
-        self.tableView.layer.masksToBounds = true
-    }
+        // self.tableView.layer.cornerRadius = 5.0
+        // self.tableView.layer.masksToBounds = true
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
