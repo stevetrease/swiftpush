@@ -31,10 +31,11 @@ class NotificationsTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 20.0
         
-        self.tableView.layer.cornerRadius = 5.0
-        self.tableView.layer.masksToBounds = true
+        // self.tableView.layer.cornerRadius = 5.0
+        // self.tableView.layer.masksToBounds = true
+        
+        // self.view.backgroundColor = UIColor(red: 0.95, green: 0, blue: 0, alpha: 1.0)
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,6 +66,8 @@ class NotificationsTableViewController: UITableViewController {
         
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
+        
+        // cell.imageView?.image = UIImage(named: "image")
         
         cell.textLabel?.text = notifications[indexPath.row].alert as String
         // cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
