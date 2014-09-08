@@ -66,6 +66,8 @@ class NotificationsTableViewController: UITableViewController {
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
+        // cell.imageView?.image = UIImage(named: "image")
+        
         cell.textLabel?.text = notifications[indexPath.row].alert as String
         // cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
         cell.detailTextLabel?.text = notifications[indexPath.row].payload as String

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA70F4D119BB95210051DBD5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA70F4D019BB95210051DBD5 /* Settings.bundle */; };
+		AAB6080E19BDC3D000FC4F8F /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = AAB6080D19BDC3D000FC4F8F /* image.png */; };
 		AAD81F5819BB63E600B08E83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD81F5719BB63E600B08E83 /* AppDelegate.swift */; };
 		AAD81F5B19BB63E600B08E83 /* Swift_Push_3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAD81F5919BB63E600B08E83 /* Swift_Push_3.xcdatamodeld */; };
 		AAD81F6019BB63E600B08E83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F5E19BB63E600B08E83 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		AA70F4D019BB95210051DBD5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		AAB6080D19BDC3D000FC4F8F /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		AAD81F5219BB63E600B08E83 /* Swift Push 3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Push 3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD81F5619BB63E600B08E83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAD81F5719BB63E600B08E83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		AAD81F5419BB63E600B08E83 /* Swift Push 3 */ = {
 			isa = PBXGroup;
 			children = (
+				AAB6080D19BDC3D000FC4F8F /* image.png */,
 				AAD81F5719BB63E600B08E83 /* AppDelegate.swift */,
 				AAD81F5E19BB63E600B08E83 /* Main.storyboard */,
 				AAD81F6119BB63E600B08E83 /* Images.xcassets */,
@@ -206,6 +209,7 @@
 				AAD81F6019BB63E600B08E83 /* Main.storyboard in Resources */,
 				AA70F4D119BB95210051DBD5 /* Settings.bundle in Resources */,
 				AAD81F6219BB63E600B08E83 /* Images.xcassets in Resources */,
+				AAB6080E19BDC3D000FC4F8F /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
