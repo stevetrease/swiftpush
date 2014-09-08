@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AA70F4D119BB95210051DBD5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA70F4D019BB95210051DBD5 /* Settings.bundle */; };
-		AAB6080E19BDC3D000FC4F8F /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = AAB6080D19BDC3D000FC4F8F /* image.png */; };
 		AAD81F5819BB63E600B08E83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD81F5719BB63E600B08E83 /* AppDelegate.swift */; };
 		AAD81F5B19BB63E600B08E83 /* Swift_Push_3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAD81F5919BB63E600B08E83 /* Swift_Push_3.xcdatamodeld */; };
 		AAD81F6019BB63E600B08E83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAD81F5E19BB63E600B08E83 /* Main.storyboard */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		AA70F4D019BB95210051DBD5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		AAB6080D19BDC3D000FC4F8F /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		AAD81F5219BB63E600B08E83 /* Swift Push 3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift Push 3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD81F5619BB63E600B08E83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAD81F5719BB63E600B08E83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 		AAD81F5419BB63E600B08E83 /* Swift Push 3 */ = {
 			isa = PBXGroup;
 			children = (
-				AAB6080D19BDC3D000FC4F8F /* image.png */,
 				AAD81F5719BB63E600B08E83 /* AppDelegate.swift */,
 				AAD81F5E19BB63E600B08E83 /* Main.storyboard */,
 				AAD81F6119BB63E600B08E83 /* Images.xcassets */,
@@ -131,6 +128,7 @@
 				AAD81F4E19BB63E600B08E83 /* Sources */,
 				AAD81F4F19BB63E600B08E83 /* Frameworks */,
 				AAD81F5019BB63E600B08E83 /* Resources */,
+				AAB0188219BDE2C100B9CFBC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -209,7 +207,6 @@
 				AAD81F6019BB63E600B08E83 /* Main.storyboard in Resources */,
 				AA70F4D119BB95210051DBD5 /* Settings.bundle in Resources */,
 				AAD81F6219BB63E600B08E83 /* Images.xcassets in Resources */,
-				AAB6080E19BDC3D000FC4F8F /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +218,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AAB0188219BDE2C100B9CFBC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Build Phases Tab\n# 3. Select: Add Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:DefaultValue $buildNumber\" \"${PROJECT_DIR}/Swift Push 3/Settings.bundle/Root.plist\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AAD81F4E19BB63E600B08E83 /* Sources */ = {
