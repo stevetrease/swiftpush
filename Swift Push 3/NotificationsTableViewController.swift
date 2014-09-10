@@ -67,6 +67,13 @@ class NotificationsTableViewController: UITableViewController {
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
+        // is this the first time the item has been shown
+        // if (notifications[indexPath.row].readYet == false) {
+        //     notifications[indexPath.row].readYet = true
+        //     cell.detailTextLabel?.textColor = UIColor.redColor()
+        //     cell.textLabel?.textColor = UIColor.redColor()
+        // }
+        
         // cell.imageView?.image = UIImage(named: "image")
         
         cell.textLabel?.text = notifications[indexPath.row].alert as String
@@ -76,7 +83,6 @@ class NotificationsTableViewController: UITableViewController {
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         }
-        
         return cell
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

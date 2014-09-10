@@ -16,4 +16,5 @@ class NotificationData {
     var alert: String = ""
     var payload: String = ""
     var receivedAt = NSDate()
+    var readYet: Bool = false
 }
