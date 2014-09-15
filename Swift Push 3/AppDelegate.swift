@@ -55,11 +55,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
         let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
         if ( existingToken as String == deviceToken.description as String ) {
-            println("device token unchanged")
-        } else {
-            println("device token changed and saved")
+            println("device token is " + deviceToken.description)
             NSUserDefaults.standardUserDefaults().setObject(deviceToken.description as String, forKey:"deviceToken")
             // NSUserDefaults.standardUserDefaults().synchronize()
+            
+            // register device token with push service
+            var request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/"))
+            var session = NSURLSession.sharedSession()
+            request.HTTPMethod = "POST"
+            var bodyData = "token=" + deviceToken.description
+            request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+            var connection = NSURLConnection(request: request, delegate: self, startImmediately: false)
+            connection.start()
         }
         println(deviceToken.description)
         println()
