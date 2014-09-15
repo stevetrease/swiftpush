@@ -80,7 +80,7 @@ class NotificationsTableViewController: UITableViewController {
         var timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].receivedAt, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         cell.textLabel?.text = notifications[indexPath.row].alert as String
-        cell.detailTextLabel?.text = timeStamp + notifications[indexPath.row].payload
+        cell.detailTextLabel?.text = timeStamp + " " + notifications[indexPath.row].payload
         // cell.detailTextLabel?.text = notifications[indexPath.row].payload as String
         
         if (indexPath.row % 2 == 0 ) {
