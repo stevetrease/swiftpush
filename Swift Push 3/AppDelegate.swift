@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         var item = NotificationData()
+        // let build: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("CurrentBuildNumber")
+        // println(build as String)
         item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
         item.readYet = false
         notifications.insert(item, atIndex: 0)
@@ -60,13 +62,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // NSUserDefaults.standardUserDefaults().synchronize()
             
             // register device token with push service
-            var request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/"))
+            var request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/")!)
             var session = NSURLSession.sharedSession()
             request.HTTPMethod = "POST"
             var bodyData = "token=" + deviceToken.description
             request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
             var connection = NSURLConnection(request: request, delegate: self, startImmediately: false)
-            connection.start()
+            connection?.start()
         }
         println(deviceToken.description)
         println()
@@ -150,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = NSBundle.mainBundle().URLForResource("Swift_Push_3", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)
+        return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
