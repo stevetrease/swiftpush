@@ -76,9 +76,12 @@ class NotificationsTableViewController: UITableViewController {
         
         // cell.imageView?.image = UIImage(named: "image")
         
+        
+        var timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].receivedAt, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+        
         cell.textLabel?.text = notifications[indexPath.row].alert as String
-        // cell.detailTextLabel.text = dateString + ": " + notifications.items[indexPath.row] as String
-        cell.detailTextLabel?.text = notifications[indexPath.row].payload as String
+        cell.detailTextLabel?.text = timeStamp + notifications[indexPath.row].payload
+        // cell.detailTextLabel?.text = notifications[indexPath.row].payload as String
         
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
