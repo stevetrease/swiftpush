@@ -16,7 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
         var item = NotificationData()
+        item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
+        item.readYet = false
+        notifications.insert(item, atIndex: 0)
+        
         switch (application.applicationState) {
         case UIApplicationState.Active:
             println ("didFinishLaunchingWithOptions - active")
