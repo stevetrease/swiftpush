@@ -24,13 +24,13 @@ class NotificationsTableViewController: UITableViewController {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let mainQueue = NSOperationQueue.mainQueue()
         
-        var observer = notificationCenter.addObserverForName("dataChanged",object:nil, queue: mainQueue) { _ in
+        var observer = notificationCenter.addObserverForName("dataChanged", object:nil, queue: mainQueue) { _ in
             self.tableView.reloadData()
         }
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 20.0
-        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+
         // self.tableView.layer.cornerRadius = 5.0
         // self.tableView.layer.masksToBounds = true
         
@@ -40,7 +40,7 @@ class NotificationsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -61,27 +61,21 @@ class NotificationsTableViewController: UITableViewController {
         // println("cellForRowAtIndexPath")
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")!
         
-        cell.layer.cornerRadius = 5.0
-        cell.layer.masksToBounds = true
+        // cell.layer.cornerRadius = 5.0
+        // cell.layer.masksToBounds = true
         
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
-        // is this the first time the item has been shown
-        // if (notifications[indexPath.row].readYet == false) {
-        //     notifications[indexPath.row].readYet = true
-        //     cell.detailTextLabel?.textColor = UIColor.redColor()
-        //     cell.textLabel?.textColor = UIColor.redColor()
-        // }
-        
-        // cell.imageView?.image = UIImage(named: "image")
-        
-        
         var timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].receivedAt, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         cell.textLabel?.text = notifications[indexPath.row].alert as String
-        cell.detailTextLabel?.text = timeStamp + " " + notifications[indexPath.row].payload
-        // cell.detailTextLabel?.text = notifications[indexPath.row].payload as String
+        // is there a message payload?
+        if (notifications[indexPath.row].payload != "" ) {
+            cell.detailTextLabel?.text = notifications[indexPath.row].payload + "\n" + timeStamp
+        } else {
+            cell.detailTextLabel?.text = timeStamp
+        }
         
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
@@ -97,6 +91,10 @@ class NotificationsTableViewController: UITableViewController {
         notifications.removeAtIndex(indexPath.row)
         println("removing row: ", indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+    }
+    
+    func onContentSizeChange(notification: NSNotification) {
+        tableView.reloadData()
     }
     
 

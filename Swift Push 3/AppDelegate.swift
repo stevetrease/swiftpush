@@ -17,10 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        var versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary["CFBundleVersion"]
+        println ("version \(versionNumber)")
+        
         var item = NotificationData()
-        // let build: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("CurrentBuildNumber")
-        // println(build as String)
-        item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
+        item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
         item.readYet = false
         notifications.insert(item, atIndex: 0)
         
@@ -70,8 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var connection = NSURLConnection(request: request, delegate: self, startImmediately: false)
             connection?.start()
         }
-        println(deviceToken.description)
-        println()
     }
     
     
