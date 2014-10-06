@@ -28,7 +28,7 @@ class NotificationsTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
         
-        self.tableView.estimatedRowHeight = 20.0
+        self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
         // self.tableView.layer.cornerRadius = 5.0
@@ -47,6 +47,12 @@ class NotificationsTableViewController: UITableViewController {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
+    }
+    
+    // Fix suggested at http://www.appcoda.com/self-sizing-cells/
+    //
+    override func viewDidAppear(animated: Bool) {
+        tableView.reloadData()
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
