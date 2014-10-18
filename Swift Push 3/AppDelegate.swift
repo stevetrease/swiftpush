@@ -89,11 +89,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var alert = t1.objectForKey("alert") as String
         var payload = userInfo.objectForKey("payload") as String
-        
+        var receivedAt = userInfo.objectForKey("timestamp") as Double
+    
         var item = NotificationData()
         item.alert = alert
         item.payload = payload
         item.readYet = false
+        item.receivedAt = NSDate(timeIntervalSince1970: receivedAt)
         
         notifications.insert(item, atIndex: 0)
         if (notifications.count > maxNotifications) {

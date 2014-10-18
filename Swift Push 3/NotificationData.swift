@@ -10,7 +10,7 @@ import Foundation
 
 // A single, global instance of this class
 var notifications = [NotificationData]()
-let maxNotifications = 64
+let maxNotifications = 16
 
 class NotificationData {
     var alert: String = ""
