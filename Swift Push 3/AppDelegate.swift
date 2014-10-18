@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
         item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
         
-        item.readYet = false
         notifications.insert(item, atIndex: 0)
         
         switch (application.applicationState) {
@@ -86,17 +85,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println ("Push message received by AppDeligate: \(userInfo)")
         
         var t1: AnyObject! = userInfo.objectForKey("aps")
-        
         var alert = t1.objectForKey("alert") as String
         var payload = userInfo.objectForKey("payload") as String
-        var receivedAt = userInfo.objectForKey("timestamp") as Double
-        var messageID = userInfo.objectForKey("messageID") as String
+        // var timeStamp = userInfo.objectForKey("timestamp") as String
+        var messageID = userInfo.objectForKey("messageID") as Int
+        
+        // println(timeStamp)
     
         var item = NotificationData()
         item.alert = alert
         item.payload = payload
-        item.readYet = false
-        item.receivedAt = NSDate(timeIntervalSince1970: receivedAt)
+        // item.timeStamp = NSDate(timeIntervalSince1970: timeStamp)
         item.messageID = messageID
         
         notifications.insert(item, atIndex: 0)

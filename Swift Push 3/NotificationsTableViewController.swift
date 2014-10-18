@@ -73,14 +73,22 @@ class NotificationsTableViewController: UITableViewController {
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
-        var timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].receivedAt, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+        var timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         cell.textLabel?.text = notifications[indexPath.row].alert as String
         // is there a message payload?
         if (notifications[indexPath.row].payload != "" ) {
-            cell.detailTextLabel?.text = notifications[indexPath.row].payload + "\n" + timeStamp
+            cell.detailTextLabel?.text =
+                notifications[indexPath.row].payload
+                + "\n"
+                + String(notifications[indexPath.row].messageID)
+                + " at "
+                + timeStamp
         } else {
-            cell.detailTextLabel?.text = timeStamp
+            cell.detailTextLabel?.text =
+                String(notifications[indexPath.row].messageID)
+                + " at "
+                + timeStamp
         }
         
         if (indexPath.row % 2 == 0 ) {

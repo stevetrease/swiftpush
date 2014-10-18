@@ -15,7 +15,6 @@ let maxNotifications = 16
 class NotificationData {
     var alert: String = ""
     var payload: String = ""
-    var receivedAt = NSDate()
-    var readYet: Bool = false
-    var messageID: String = ""
+    var timeStamp = NSDate()
+    var messageID: Int = 0
 }
