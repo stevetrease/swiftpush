@@ -76,20 +76,22 @@ class NotificationsTableViewController: UITableViewController {
         var timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         cell.textLabel?.text = notifications[indexPath.row].alert as String
+        
+        var detailString: String = ""
         // is there a message payload?
         if (notifications[indexPath.row].payload != "" ) {
-            cell.detailTextLabel?.text =
+            detailString =
                 notifications[indexPath.row].payload
                 + "\n"
-                + String(notifications[indexPath.row].messageID)
-                + " at "
-                + timeStamp
-        } else {
-            cell.detailTextLabel?.text =
-                String(notifications[indexPath.row].messageID)
-                + " at "
-                + timeStamp
         }
+        detailString = detailString + timeStamp
+        if (notifications[indexPath.row].messageID > 0) {
+            detailString = detailString
+                + " ("
+                + String(notifications[indexPath.row].messageID)
+                + ")"
+        }
+        cell.detailTextLabel?.text = detailString
         
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
