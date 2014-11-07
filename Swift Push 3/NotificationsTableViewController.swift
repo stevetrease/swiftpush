@@ -65,17 +65,17 @@ class NotificationsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // println("cellForRowAtIndexPath")
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")!
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")
         
         // cell.layer.cornerRadius = 5.0
         // cell.layer.masksToBounds = true
         
-        cell.textLabel?.numberOfLines = 0
+        cell.textLabel.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
         var timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
-        cell.textLabel?.text = notifications[indexPath.row].alert as String
+        cell.textLabel.text = notifications[indexPath.row].alert as String
         
         var detailString: String = ""
         // is there a message payload?
