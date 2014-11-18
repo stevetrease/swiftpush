@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSUserDefaults.standardUserDefaults().synchronize()
             
         // register device token with push service
-        var request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/")!)
+        var request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/swiftpush/")!)
         var session = NSURLSession.sharedSession()
         request.HTTPMethod = "POST"
         var bodyData = "token=" + deviceToken.description + "&device=" + UIDevice.currentDevice().name
