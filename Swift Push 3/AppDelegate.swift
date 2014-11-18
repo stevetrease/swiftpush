@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/")!)
         var session = NSURLSession.sharedSession()
         request.HTTPMethod = "POST"
-        var bodyData = "token=" + deviceToken.description
+        var bodyData = "token=" + deviceToken.description + "&device=" + UIDevice.currentDevice().name
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         var connection = NSURLConnection(request: request, delegate: self, startImmediately: false)
         connection?.start()
