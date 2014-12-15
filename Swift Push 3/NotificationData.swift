@@ -10,11 +10,11 @@ import Foundation
 
 // A single, global instance of this class
 var notifications = [NotificationData]()
-let maxNotifications = 48
+let maxNotifications = 64
 
 class NotificationData {
     var alert: String = ""
     var payload: String = ""
-    var timeStamp = NSDate()
+    var timeStamp = NSDate()        // timestamp the date/time the notification record is created
     var messageID: Int = 0
 }
