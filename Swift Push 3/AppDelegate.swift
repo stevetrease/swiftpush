@@ -82,41 +82,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary!, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
-        println ("Push message received by AppDeligate: \(userInfo)")
         
+        println()
+        switch (application.applicationState) {
+        case UIApplicationState.Active:
+            println ("notification received by AppDeligate whilst active")
+        case UIApplicationState.Inactive:
+            println ("notification received by AppDeligate whilst inactive")
+        case UIApplicationState.Background:
+            println ("notification received by AppDeligate whilst in background")
+        default:
+            println ("notification received by AppDeligate with unknown application state")
+        }
+        println (userInfo)
+        
+        // decode mesage and create new object
         var t1: AnyObject! = userInfo.objectForKey("aps")
         var alert = t1.objectForKey("alert") as String
         var payload = userInfo.objectForKey("payload") as String
         // var timeStamp = userInfo.objectForKey("timestamp") as String
         var messageID = userInfo.objectForKey("messageID") as Int
         
-        // println(timeStamp)
-    
         var item = NotificationData()
         item.alert = alert
         item.payload = payload
         // item.timeStamp = NSDate(timeIntervalSince1970: timeStamp)
         item.messageID = messageID
+    
         
-        notifications.insert(item, atIndex: 0)
-        if (notifications.count > maxNotifications) {
-            notifications.removeLast()
+        // Is this  a new message? Check for exisitance of messageID in array
+        var newItem = true;
+        for n in notifications {
+            if (n.messageID == item.messageID) {
+                newItem = false
+            }
         }
         
-        // notify tableview to refresh
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName("dataChanged", object: self)
-        
-        switch (application.applicationState) {
-        case UIApplicationState.Active:
-            println ("notification received whilst active")
-        case UIApplicationState.Inactive:
-            println ("notification received whilst inactive")
-        case UIApplicationState.Background:
-            println ("notification received whilst in background")
-        default:
-            println("notification received with unknown application state")
+        if (newItem == true) {
+            println("adding notification")
+            notifications.insert(item, atIndex: 0)
+            if (notifications.count > maxNotifications) {
+                notifications.removeLast()
+            }
+            // notify tableview to refresh
+            let center = NSNotificationCenter.defaultCenter()
+            center.postNotificationName("dataChanged", object: self)
+        } else {
+            println("duplicate notification - ignoring")
         }
+
+        // finished
         completionHandler(UIBackgroundFetchResult.NewData)
         
     }
