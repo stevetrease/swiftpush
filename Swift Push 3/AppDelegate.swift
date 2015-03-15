@@ -17,11 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        var versionNumber: AnyObject = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"]!
-        println ("version \(versionNumber)")
+        // var versionNumber: AnyObject = NSBundle.mainBundle().infoDictionary["CFBundleVersion"]
+        // println ("version \(versionNumber)")
         
         var item = NotificationData()
-        item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
+        // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
+        item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
         
         notifications.insert(item, atIndex: 0)
         
@@ -102,37 +103,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // decode mesage and create new object
         var t1: AnyObject! = userInfo.objectForKey("aps")
         var alert = t1.objectForKey("alert") as String
-        var payload = userInfo.objectForKey("payload") as String
+        // var payload = userInfo.objectForKey("payload") as String
         // var timeStamp = userInfo.objectForKey("timestamp") as String
-        var messageID = userInfo.objectForKey("messageID") as Int
+        // var messageID = userInfo.objectForKey("messageID") as Int
         
         var item = NotificationData()
         item.alert = alert
-        item.payload = payload
-        // item.timeStamp = NSDate(timeIntervalSince1970: timeStamp)
-        item.messageID = messageID
-    
+        // item.payload = alert
+        // item.timeStamp = NSDate()
+        // item.messageID = messageID
         
-        // Is this  a new message? Check for exisitance of messageID in array
-        var newItem = true;
-        for n in notifications {
-            if (n.messageID == item.messageID) {
-                newItem = false
-            }
+        notifications.insert(item, atIndex: 0)
+        if (notifications.count > maxNotifications) {
+            notifications.removeLast()
         }
-        
-        if (newItem == true) {
-            println("adding notification")
-            notifications.insert(item, atIndex: 0)
-            if (notifications.count > maxNotifications) {
-                notifications.removeLast()
-            }
-            // notify tableview to refresh
-            let center = NSNotificationCenter.defaultCenter()
-            center.postNotificationName("dataChanged", object: self)
-        } else {
-            println("duplicate notification - ignoring")
-        }
+        let center = NSNotificationCenter.defaultCenter()
+        center.postNotificationName("dataChanged", object: self)
 
         // finished
         completionHandler(UIBackgroundFetchResult.NewData)

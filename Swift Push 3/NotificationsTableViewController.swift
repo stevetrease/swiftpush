@@ -67,32 +67,15 @@ class NotificationsTableViewController: UITableViewController {
         // println("cellForRowAtIndexPath")
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")
         
-        // cell.layer.cornerRadius = 5.0
-        // cell.layer.masksToBounds = true
-        
-        
+        cell.layer.cornerRadius = 5.0
+        cell.layer.masksToBounds = true
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
-        var timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+        let timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         cell.textLabel?.text = notifications[indexPath.row].alert as String
-        
-        var detailString: String = ""
-        // is there a message payload?
-        if (notifications[indexPath.row].payload != "" ) {
-            detailString =
-                notifications[indexPath.row].payload
-                + "\n"
-        }
-        detailString = detailString + timeStamp
-        if (notifications[indexPath.row].messageID > 0) {
-            detailString = detailString
-                + " ("
-                + String(notifications[indexPath.row].messageID)
-                + ")"
-        }
-        cell.detailTextLabel?.text = detailString
+        cell.detailTextLabel?.text = timeStamp
         
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
