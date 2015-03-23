@@ -15,11 +15,11 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     func filterContentForSearchText(searchText: String) {
         // Filter the array using the filter method
         self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
-            // let categoryMatch = (scope == "All") || (notification.alert == scope)
-            let stringMatch = notification.alert.rangeOfString(searchText)
+            let stringMatch = notification.alert.lowercaseString.rangeOfString(searchText.lowercaseString)
             return (stringMatch != nil)
         })
     }
+    
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
         self.filterContentForSearchText(searchString)
         return true
@@ -78,12 +78,9 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        // println("numberOfRowsInSection")
         if tableView == self.searchDisplayController!.searchResultsTableView {
-            println("filtered ")
             return self.filteredNotifications.count
         } else {
-            println("unfiltered ")
             return notifications.count
         }
     }
