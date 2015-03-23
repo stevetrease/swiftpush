@@ -8,7 +8,27 @@
 
 import UIKit
 
-class NotificationsTableViewController: UITableViewController {
+class NotificationsTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
+    
+    var filteredNotifications = [NotificationData]()
+    
+    func filterContentForSearchText(searchText: String) {
+        // Filter the array using the filter method
+        self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
+            // let categoryMatch = (scope == "All") || (notification.alert == scope)
+            let stringMatch = notification.alert.rangeOfString(searchText)
+            return (stringMatch != nil)
+        })
+    }
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        self.filterContentForSearchText(searchString)
+        return true
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +79,13 @@ class NotificationsTableViewController: UITableViewController {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         // println("numberOfRowsInSection")
-        return notifications.count
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            println("filtered ")
+            return self.filteredNotifications.count
+        } else {
+            println("unfiltered ")
+            return notifications.count
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -67,14 +93,22 @@ class NotificationsTableViewController: UITableViewController {
         // println("cellForRowAtIndexPath")
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")
         
+        var notification : NotificationData
+        
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            notification = filteredNotifications[indexPath.row]
+        } else {
+            notification = notifications[indexPath.row]
+        }
+ 
         cell.layer.cornerRadius = 5.0
         cell.layer.masksToBounds = true
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
-        let timeStamp = NSDateFormatter.localizedStringFromDate(notifications[indexPath.row].timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+        let timeStamp = NSDateFormatter.localizedStringFromDate(notification.timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
-        cell.textLabel?.text = notifications[indexPath.row].alert as String
+        cell.textLabel?.text = notification.alert as String
         cell.detailTextLabel?.text = timeStamp
         
         if (indexPath.row % 2 == 0 ) {
@@ -82,10 +116,12 @@ class NotificationsTableViewController: UITableViewController {
         }
         return cell
     }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         println("selecting row: \(indexPath.row)")
     }
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
         notifications.removeAtIndex(indexPath.row)
