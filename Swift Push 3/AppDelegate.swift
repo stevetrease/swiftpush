@@ -58,6 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
         
+        // for testing Xcode Server static analysis
+        if (true) {
+            println ("true")
+        } else {
+            println ("false")
+        }
+        
         let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
         
         println("device token is " + deviceToken.description)
