@@ -33,11 +33,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         println("viewDidLoad")
-
-        
-        // let searchController = UISearchController(searchResultsController: nil)
-        // searchController.hidesNavigationBarDuringPresentation = false
-        
+             
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let mainQueue = NSOperationQueue.mainQueue()
         
@@ -55,7 +51,6 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     }
     
     // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
