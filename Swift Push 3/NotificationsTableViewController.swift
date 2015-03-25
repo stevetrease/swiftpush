@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
+class NotificationsTableViewController: UITableViewController, UISearchBarDelegate {
     
     var filteredNotifications = [NotificationData]()
     
@@ -21,7 +21,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     }
     
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        self.filterContentForSearchText(searchString)
+         self.filterContentForSearchText(searchString)
         return true
     }
     
@@ -34,12 +34,9 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
         super.viewDidLoad()
         println("viewDidLoad")
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        // let searchController = UISearchController(searchResultsController: nil)
+        // searchController.hidesNavigationBarDuringPresentation = false
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let mainQueue = NSOperationQueue.mainQueue()
@@ -50,11 +47,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
         
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
-
-        // self.tableView.layer.cornerRadius = 5.0
-        // self.tableView.layer.masksToBounds = true
         
-        // self.view.backgroundColor = UIColor(red: 0.95, green: 0, blue: 0, alpha: 1.0)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
