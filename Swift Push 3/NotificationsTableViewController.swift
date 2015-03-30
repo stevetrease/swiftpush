@@ -45,6 +45,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
