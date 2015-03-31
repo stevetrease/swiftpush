@@ -24,15 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
         item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
         notifications.insert(item, atIndex: 0)
-        item = NotificationData()
-        // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
-        item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
-        notifications.insert(item, atIndex: 0)
-        item = NotificationData()
-        // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
-        item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
-        notifications.insert(item, atIndex: 0)
-        
+      
         switch (application.applicationState) {
         case UIApplicationState.Active:
             println ("didFinishLaunchingWithOptions - active")
