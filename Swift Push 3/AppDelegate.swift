@@ -23,7 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var item = NotificationData()
         // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
         item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
-        
+        notifications.insert(item, atIndex: 0)
+        item = NotificationData()
+        // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
+        item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
+        notifications.insert(item, atIndex: 0)
+        item = NotificationData()
+        // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
+        item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
         notifications.insert(item, atIndex: 0)
         
         switch (application.applicationState) {
@@ -37,8 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println ("didFinishLaunchingWithOptions - unknown application state")
         }
         
-        var types: UIUserNotificationType = UIUserNotificationType.Badge |
+        var types: UIUserNotificationType =
             UIUserNotificationType.Alert |
+            UIUserNotificationType.Badge |
             UIUserNotificationType.Sound
         
         var settings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: types, categories: nil )
@@ -57,7 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
-        
         let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
         
         println("device token is " + deviceToken.description)
@@ -86,8 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary!, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
-        
-        println()
         switch (application.applicationState) {
         case UIApplicationState.Active:
             println ("notification received by AppDeligate whilst active")

@@ -8,32 +8,34 @@
 
 import UIKit
 
-class NotificationsTableViewController: UITableViewController, UISearchBarDelegate {
+class NotificationsTableViewController: UITableViewController, UISearchBarDelegate, UITableViewDataSource {
     
     var filteredNotifications = [NotificationData]()
     
     func filterContentForSearchText(searchText: String) {
         // Filter the array using the filter method
-        self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
+        filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
             let stringMatch = notification.alert.lowercaseString.rangeOfString(searchText.lowercaseString)
             return (stringMatch != nil)
         })
     }
     
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
-         self.filterContentForSearchText(searchString)
+        filterContentForSearchText(searchString)
+        println("searchDisplayController:")
         return true
     }
     
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        println("searchDisplayController")
         return true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         println("viewDidLoad")
-             
+        
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let mainQueue = NSOperationQueue.mainQueue()
         
@@ -43,59 +45,54 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
         
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        println("didReceiveMemoryWarning")
         // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
     
-    // Fix suggested at http://www.appcoda.com/self-sizing-cells/
-    //
-    override func viewDidAppear(animated: Bool) {
-        tableView.reloadData()
-    }
-
+    // override func viewDidAppear(animated: Bool) {
+    //    self.tableView.estimatedRowHeight = 44.0
+    //    self.tableView.rowHeight = UITableViewAutomaticDimension
+    //    tableView.reloadData()
+    //}
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         if tableView == self.searchDisplayController!.searchResultsTableView {
-            return self.filteredNotifications.count
+            return filteredNotifications.count
         } else {
             return notifications.count
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        // println("cellForRowAtIndexPath")
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")
-        
+        println("cellForRowAtIndexPath ", indexPath.row)
+       
         var notification : NotificationData
-        
         if tableView == self.searchDisplayController!.searchResultsTableView {
             notification = filteredNotifications[indexPath.row]
         } else {
             notification = notifications[indexPath.row]
         }
  
-        cell.layer.cornerRadius = 5.0
+        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("ReuseCell", forIndexPath: indexPath) as UITableViewCell
+        
+        // let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")
+
+        cell.layer.cornerRadius = 10.0
         cell.layer.masksToBounds = true
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
-        let timeStamp = NSDateFormatter.localizedStringFromDate(notification.timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
-        
         cell.textLabel?.text = notification.alert as String
-        cell.detailTextLabel?.text = timeStamp
+        cell.detailTextLabel?.text = NSDateFormatter.localizedStringFromDate(notification.timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
@@ -105,7 +102,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        println("selecting row: \(indexPath.row)")
+        println("selecting row: ", indexPath.row)
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
@@ -116,6 +113,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     }
     
     func onContentSizeChange(notification: NSNotification) {
+        println("onContentSizeChange")
         tableView.reloadData()
     }
     
