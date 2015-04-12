@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData!) {
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData) {
         let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
         
         println("device token is " + deviceToken.description)
@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var receipt = NSBundle.mainBundle().appStoreReceiptURL?.lastPathComponent
         
         // register device token with push service
-        var request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/swiftpush/")!)
+        var request = NSMutableURLRequest(URL: NSURL(string: "http://www.trease.eu/ibeacon/swiftpush/")!)
         var session = NSURLSession.sharedSession()
         request.HTTPMethod = "POST"
         var bodyData = "token=" + deviceToken.description
@@ -78,13 +78,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func application(application: UIApplication!, didFailToRegisterForRemoteNotificationsWithError error:NSError!) {
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error:NSError) {
         println("Failed to register device token")
         println( error.localizedDescription )
     }
     
-    
-    func application(application: UIApplication!, didReceiveRemoteNotification userInfo:NSDictionary!, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         switch (application.applicationState) {
         case UIApplicationState.Active:
             println ("notification received by AppDeligate whilst active")
@@ -97,15 +96,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         println (userInfo)
         
-        // decode mesage and create new object
-        var t1: AnyObject! = userInfo.objectForKey("aps")
-        var alert = t1.objectForKey("alert") as String
+        var item = NotificationData()
+        
+        if let aps = userInfo["aps"] as? NSDictionary {
+            if let alert = aps["alert"] as? String {
+                item.alert = alert
+            }
+        }
+        
         // var payload = userInfo.objectForKey("payload") as String
         // var timeStamp = userInfo.objectForKey("timestamp") as String
         // var messageID = userInfo.objectForKey("messageID") as Int
         
-        var item = NotificationData()
-        item.alert = alert
         // item.payload = alert
         // item.timeStamp = NSDate()
         // item.messageID = messageID
@@ -119,7 +121,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // finished
         completionHandler(UIBackgroundFetchResult.NewData)
-        
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -151,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "Trease.Swift_Push_3" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        return urls[urls.count-1] as! NSURL
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {

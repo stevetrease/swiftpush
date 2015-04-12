@@ -20,14 +20,15 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
         })
     }
     
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        filterContentForSearchText(searchString)
+    func searchDisplayController(controller: UISearchController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        self.filterContentForSearchText(searchString)
         println("searchDisplayController:")
         return true
     }
     
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+    func searchDisplayController(controller: UISearchController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        // self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
+        self.filterContentForSearchText(controller.searchBar.text)
         println("searchDisplayController")
         return true
     }
@@ -76,13 +77,13 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
         println("cellForRowAtIndexPath ", indexPath.row)
        
         var notification : NotificationData
-        if tableView == self.searchDisplayController!.searchResultsTableView {
+        if tableView == searchDisplayController!.searchResultsTableView {
             notification = filteredNotifications[indexPath.row]
         } else {
             notification = notifications[indexPath.row]
         }
  
-        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("ReuseCell", forIndexPath: indexPath) as UITableViewCell
+        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("ReuseCell", forIndexPath: indexPath) as! UITableViewCell
         
         // let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")
 
