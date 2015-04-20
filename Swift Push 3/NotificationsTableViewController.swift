@@ -87,7 +87,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
         
         // let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")
 
-        cell.layer.cornerRadius = 10.0
+        // cell.layer.cornerRadius = 10.0
         cell.layer.masksToBounds = true
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0

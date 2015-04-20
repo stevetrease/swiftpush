@@ -17,12 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        // var versionNumber: AnyObject = NSBundle.mainBundle().infoDictionary["CFBundleVersion"]
-        // println ("version \(versionNumber)")
+        let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
+        println ("version \(versionNumber!)")
         
         var item = NotificationData()
-        // item.alert = "Swift Push (\(versionNumber)) starting on " + UIDevice.currentDevice().name
-        item.alert = "Swift Push starting on " + UIDevice.currentDevice().name
+        item.alert = "Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name
         notifications.insert(item, atIndex: 0)
       
         switch (application.applicationState) {
@@ -51,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationUserDidTakeScreenshotNotification, object: nil, queue: mainQueue) { notification in
             println("screenshot taken")
         }
-        
         return true
     }
     
@@ -63,15 +61,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSUserDefaults.standardUserDefaults().setObject(deviceToken.description as String, forKey:"deviceToken")
         NSUserDefaults.standardUserDefaults().synchronize()
         
-        var receipt = NSBundle.mainBundle().appStoreReceiptURL?.lastPathComponent
+        let receipt = NSBundle.mainBundle().appStoreReceiptURL?.lastPathComponent
+        let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
         
         // register device token with push service
         var request = NSMutableURLRequest(URL: NSURL(string: "http://www.trease.eu/ibeacon/swiftpush/")!)
         var session = NSURLSession.sharedSession()
         request.HTTPMethod = "POST"
-        var bodyData = "token=" + deviceToken.description
-                     + "&device=" + UIDevice.currentDevice().name
-                     + "&mode=" + receipt!
+        var bodyData = "token=\(deviceToken.description)"
+        bodyData += "&device=\(UIDevice.currentDevice().name)"
+        bodyData += "&mode=\(receipt!)"
+        bodyData += "&version=\(versionNumber!)"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         var connection = NSURLConnection(request: request, delegate: self, startImmediately: false)
         connection?.start()
