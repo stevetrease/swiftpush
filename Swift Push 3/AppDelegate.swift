@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
@@ -62,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSUserDefaults.standardUserDefaults().synchronize()
         
         let receipt = NSBundle.mainBundle().appStoreReceiptURL?.lastPathComponent
+        let mode = receipt
         let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
         
         // register device token with push service
@@ -70,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         request.HTTPMethod = "POST"
         var bodyData = "token=\(deviceToken.description)"
         bodyData += "&device=\(UIDevice.currentDevice().name)"
-        bodyData += "&mode=\(receipt!)"
+        bodyData += "&mode=\(mode!)"
         bodyData += "&version=\(versionNumber!)"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         var connection = NSURLConnection(request: request, delegate: self, startImmediately: false)
@@ -101,16 +103,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? String {
                 item.alert = alert
+                println ("alert: \(alert)")
             }
         }
-        
-        // var payload = userInfo.objectForKey("payload") as String
-        // var timeStamp = userInfo.objectForKey("timestamp") as String
-        // var messageID = userInfo.objectForKey("messageID") as Int
-        
-        // item.payload = alert
-        // item.timeStamp = NSDate()
-        // item.messageID = messageID
+        if let messageID = userInfo["messageID"] as? Int {
+            item.messageID = messageID
+            println ("messageID: \(messageID)")
+        }
+        if let timeStamp = userInfo["timestamp"] as? NSTimeInterval {
+            item.timeStamp = NSDate (timeIntervalSince1970: timeStamp)
+            println ("timestamp: \(timeStamp)")
+        }
         
         notifications.insert(item, atIndex: 0)
         if (notifications.count > maxNotifications) {

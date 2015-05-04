@@ -93,7 +93,11 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
         cell.detailTextLabel?.numberOfLines = 0
         
         cell.textLabel?.text = notification.alert as String
-        cell.detailTextLabel?.text = NSDateFormatter.localizedStringFromDate(notification.timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+        // var detailTextLabel: String = NSDateFormatter.localizedStringFromDate(notification.timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String
+        // etailTextLabel += " \(notification.messageID) "
+        // ell.detailTextLabel?.text = detailTextLabel
+        cell.detailTextLabel?.text = NSDateFormatter.localizedStringFromDate(notification.timeStamp, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String + " (\(notification.messageID))"
+        
         
         if (indexPath.row % 2 == 0 ) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)

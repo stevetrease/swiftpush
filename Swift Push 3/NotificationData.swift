@@ -16,5 +16,5 @@ class NotificationData {
     var alert: String = ""
     // var payload: String = ""
     var timeStamp = NSDate()        // timestamp the date/time the notification record is created
-    // var messageID: Int = 0
+    var messageID: Int = 0
 }
