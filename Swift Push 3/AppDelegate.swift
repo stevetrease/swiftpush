@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println ("messageID: \(messageID)")
         }
         if let timeStamp = userInfo["timestamp"] as? NSTimeInterval {
-            item.timeStamp = NSDate (timeIntervalSince1970: timeStamp)
+            item.timeStampSent = NSDate (timeIntervalSince1970: timeStamp)
             println ("timestamp: \(timeStamp)")
         }
         
