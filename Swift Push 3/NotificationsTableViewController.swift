@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsTableViewController: UITableViewController, UISearchBarDelegate, UITableViewDataSource {
+class NotificationsTableViewController: UITableViewController, UISearchBarDelegate {
     
     var filteredNotifications = [NotificationData]()
     
@@ -22,25 +22,25 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     
     func searchDisplayController(controller: UISearchController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
         self.filterContentForSearchText(searchString)
-        println("searchDisplayController:")
+        print("searchDisplayController:")
         return true
     }
     
     func searchDisplayController(controller: UISearchController!, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
         // self.filterContentForSearchText(self.searchDisplayController!.searchBar.text)
-        self.filterContentForSearchText(controller.searchBar.text)
-        println("searchDisplayController")
+        self.filterContentForSearchText(controller.searchBar.text!)
+        print("searchDisplayController")
         return true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("viewDidLoad")
+        print("viewDidLoad")
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let mainQueue = NSOperationQueue.mainQueue()
         
-        var observer = notificationCenter.addObserverForName("dataChanged", object:nil, queue: mainQueue) { _ in
+        _ = notificationCenter.addObserverForName("dataChanged", object:nil, queue: mainQueue) { _ in
             self.tableView.reloadData()
         }
         
@@ -50,7 +50,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        println("didReceiveMemoryWarning")
+        print("didReceiveMemoryWarning")
         // Dispose of any resources that can be recreated.
     }
     
@@ -74,7 +74,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("cellForRowAtIndexPath ", indexPath.row)
+        print("cellForRowAtIndexPath ", indexPath.row)
        
         var notification : NotificationData
         if tableView == searchDisplayController!.searchResultsTableView {
@@ -83,7 +83,7 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
             notification = notifications[indexPath.row]
         }
  
-        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("ReuseCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("ReuseCell", forIndexPath: indexPath) as UITableViewCell
         
         // let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "ReuseCell")
 
@@ -104,18 +104,18 @@ class NotificationsTableViewController: UITableViewController, UISearchBarDelega
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        println("selecting row: ", indexPath.row)
+        print("selecting row: ", indexPath.row)
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
         notifications.removeAtIndex(indexPath.row)
-        println("removing row: ", indexPath.row)
+        print("removing row: ", indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
     }
     
     func onContentSizeChange(notification: NSNotification) {
-        println("onContentSizeChange")
+        print("onContentSizeChange")
         tableView.reloadData()
     }
     
