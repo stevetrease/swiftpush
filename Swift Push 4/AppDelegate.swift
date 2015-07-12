@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
         print ("version \(versionNumber!)")
         
+        UIDevice.currentDevice().batteryMonitoringEnabled = true
+        
         let item = NotificationData()
         item.alert = "Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name
         notifications.insert(item, atIndex: 0)
@@ -60,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mode = receipt
         let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://www.trease.eu/ibeacon/swiftpush/")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/swiftpush/")!)
         request.HTTPMethod = "POST"
         var bodyData = "token=\(deviceToken.description)"
         bodyData += "&device=\(UIDevice.currentDevice().name)"
@@ -115,6 +117,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let center = NSNotificationCenter.defaultCenter()
         center.postNotificationName("dataChanged", object: self)
+        
+        
+        
+        let formatter =  NSNumberFormatter()
+        formatter.numberStyle = .PercentStyle
+        
+        let batteryLevel = formatter.stringFromNumber(UIDevice.currentDevice().batteryLevel)
+        
+        var chargeStatus = ""
+        
+        switch UIDevice.currentDevice().batteryState {
+        case UIDeviceBatteryState.Unknown:
+            chargeStatus = "Unknown"
+        case UIDeviceBatteryState.Unplugged:
+            chargeStatus = "Unplugged"
+        case UIDeviceBatteryState.Charging:
+            chargeStatus = "Charging"
+        case UIDeviceBatteryState.Full:
+            chargeStatus = "Full"
+        }
+        
+        print("battery status change: " + chargeStatus + " " + batteryLevel!)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/battery/")!)
+        request.HTTPMethod = "POST"
+        var bodyData = "&device=\(UIDevice.currentDevice().name)"
+        bodyData += "&batterystate=" + chargeStatus
+        bodyData += "&batterylevel=" + batteryLevel!
+        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            let x = response as? NSHTTPURLResponse
+            print ("status code \(x?.statusCode)")
+        }
+        task!.resume()
+        
+        
+        
+        
         
         // finished
         completionHandler(UIBackgroundFetchResult.NewData)
