@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let x = response as? NSHTTPURLResponse
             print ("status code \(x?.statusCode)")
         }
-        task!.resume()
+        task.resume()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error:NSError) {
@@ -111,20 +111,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print ("timestamp: \(timeStamp)")
         }
         
-        notifications.insert(item, atIndex: 0)
-        if (notifications.count > maxNotifications) {
-            notifications.removeLast()
+        // Is is the message ID already in use
+        var duplicate = false
+        for var index = 0 ; index < notifications.count; index++ {
+            if notifications[index].messageID == item.messageID && notifications[index].alert == item.alert {
+                duplicate = true
+            }
         }
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName("dataChanged", object: self)
         
+        if duplicate == false {
+            notifications.insert(item, atIndex: 0)
+            if (notifications.count > maxNotifications) {
+                notifications.removeLast()
+            }
+            let center = NSNotificationCenter.defaultCenter()
+            center.postNotificationName("dataChanged", object: self)
+        }
         
         
         let formatter =  NSNumberFormatter()
         formatter.numberStyle = .PercentStyle
         
         let batteryLevel = formatter.stringFromNumber(UIDevice.currentDevice().batteryLevel)
-        
         var chargeStatus = ""
         
         switch UIDevice.currentDevice().batteryState {
@@ -152,12 +160,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let x = response as? NSHTTPURLResponse
             print ("status code \(x?.statusCode)")
         }
-        task!.resume()
-        
-        
-        
-        
-        
+        task.resume()
+
         // finished
         completionHandler(UIBackgroundFetchResult.NewData)
     }
