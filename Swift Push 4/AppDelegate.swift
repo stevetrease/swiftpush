@@ -152,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         request.HTTPMethod = "POST"
         var bodyData = "&device=\(UIDevice.currentDevice().name)"
         bodyData += "&batterystate=" + chargeStatus
-        bodyData += "&batterylevel=" + batteryLevel!
+        bodyData += "&batterylevel=\(UIDevice.currentDevice().batteryLevel)"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
