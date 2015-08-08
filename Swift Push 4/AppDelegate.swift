@@ -128,40 +128,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             center.postNotificationName("dataChanged", object: self)
         }
         
-        
-        let formatter =  NSNumberFormatter()
-        formatter.numberStyle = .PercentStyle
-        
-        let batteryLevel = formatter.stringFromNumber(UIDevice.currentDevice().batteryLevel)
-        var chargeStatus = ""
-        
-        switch UIDevice.currentDevice().batteryState {
-        case UIDeviceBatteryState.Unknown:
-            chargeStatus = "Unknown"
-        case UIDeviceBatteryState.Unplugged:
-            chargeStatus = "Unplugged"
-        case UIDeviceBatteryState.Charging:
-            chargeStatus = "Charging"
-        case UIDeviceBatteryState.Full:
-            chargeStatus = "Full"
-        }
-        
-        print("battery status change: " + chargeStatus + " " + batteryLevel!)
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/battery/")!)
-        request.HTTPMethod = "POST"
-        var bodyData = "&device=\(UIDevice.currentDevice().name)"
-        bodyData += "&batterystate=" + chargeStatus
-        bodyData += "&batterylevel=\(UIDevice.currentDevice().batteryLevel)"
-        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            let x = response as? NSHTTPURLResponse
-            print ("status code \(x?.statusCode)")
-        }
-        task.resume()
-
         // finished
         completionHandler(UIBackgroundFetchResult.NewData)
     }
