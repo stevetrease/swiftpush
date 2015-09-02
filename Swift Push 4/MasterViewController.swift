@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,28 @@ class MasterViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
+    
+
+    var filteredNotifications = [NotificationData]()
+    
+    func filterContentForSearchText(searchText: String) {
+        // Filter the array using the filter method
+        self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
+            // let categoryMatch = (scope == "All") || (notification.alert == scope)
+            let stringMatch = notification.alert.rangeOfString(searchText)
+            return (stringMatch != nil)
+        })
+    }
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
+        self.filterContentForSearchText(searchString!)
+        return true
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
+        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text!)
+        return true
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,7 +63,13 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notifications.count
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            print("filtered ")
+            return self.filteredNotifications.count
+        } else {
+            print("unfiltered ")
+            return notifications.count
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -49,6 +77,12 @@ class MasterViewController: UITableViewController {
         var notification : NotificationData
         
         notification = notifications[indexPath.row]
+        
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            notification = filteredNotifications[indexPath.row]
+        } else {
+            notification = notifications[indexPath.row]
+        }
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
