@@ -17,23 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
-        print ("version \(versionNumber!)")
-        
-        UIDevice.currentDevice().batteryMonitoringEnabled = true
-        
-        var item = NotificationData()
-        item.alert = "Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name
-        notifications.insert(item, atIndex: 0)
-        
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.SpellOutStyle
-        for i in 1...10 {
-            item = NotificationData()
-            item.alert = "test data " + formatter.stringFromNumber(i)!
-            notifications.insert(item, atIndex: 0)
-        }
-        
         switch (application.applicationState) {
         case UIApplicationState.Active:
             print ("didFinishLaunchingWithOptions - active")
@@ -42,6 +25,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case UIApplicationState.Background:
             print ("didFinishLaunchingWithOptions - background")
         }
+        
+        let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
+        print ("version \(versionNumber!)")
+        
+        // display initial startup message
+        var item = NotificationData()
+        item.alert = "Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name
+        notifications.insert(item, atIndex: 0)
+        
+        // display an additional set of test messages
+        /*
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.SpellOutStyle
+        for i in 1...10 {
+            item = NotificationData()
+            item.alert = "test data " + formatter.stringFromNumber(i)!
+            notifications.insert(item, atIndex: 0)
+        }
+        */
         
         let types: UIUserNotificationType =
         [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
@@ -55,6 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainQueue = NSOperationQueue.mainQueue()
         NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationUserDidTakeScreenshotNotification, object: nil, queue: mainQueue) { notification in
             print("screenshot taken")
+            item = NotificationData()
+            item.alert = "screenshot taken"
+            item.timeStampSent = NSDate ()
+            notifications.insert(item, atIndex: 0)
         }
         return true
     }
