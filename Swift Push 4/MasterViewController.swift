@@ -8,8 +8,11 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
+class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
+    var filteredNotifications = [NotificationData]()
+    var resultSearchController = UISearchController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,35 +25,26 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.resultSearchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = true
+            controller.searchBar.sizeToFit()
+            
+            self.tableView.tableHeaderView = controller.searchBar
+            
+            return controller
+        })()
+        
+        // Reload the table
+        self.tableView.reloadData()
     }
-    
-
-    var filteredNotifications = [NotificationData]()
-    
-    func filterContentForSearchText(searchText: String) {
-        // Filter the array using the filter method
-        self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
-            // let categoryMatch = (scope == "All") || (notification.alert == scope)
-            let stringMatch = notification.alert.rangeOfString(searchText)
-            return (stringMatch != nil)
-        })
-    }
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
-        self.filterContentForSearchText(searchString!)
-        return true
-    }
-    
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
-        self.filterContentForSearchText(self.searchDisplayController!.searchBar.text!)
-        return true
-    }
-    
-    
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         print("didReceiveMemoryWarning")
-
     }
 
     
@@ -63,11 +57,12 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.searchDisplayController!.searchResultsTableView {
-            print("filtered ")
+        if (self.resultSearchController.active) {
+            print("filtered")
             return self.filteredNotifications.count
-        } else {
-            print("unfiltered ")
+        }
+        else {
+            print("unfiltered")
             return notifications.count
         }
     }
@@ -77,8 +72,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         var notification : NotificationData
         
         notification = notifications[indexPath.row]
-        
-        if tableView == self.searchDisplayController!.searchResultsTableView {
+
+        if (self.resultSearchController.active) {
             notification = filteredNotifications[indexPath.row]
         } else {
             notification = notifications[indexPath.row]
@@ -96,6 +91,26 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         
         return cell
     }
+    
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController)
+    {
+        print(updateSearchResultsForSearchController)
+        print(searchController.searchBar.text!)
+        
+        // filteredNotifications.removeAll(keepCapacity: false)
+        if searchController.searchBar.text! == "" {
+            filteredNotifications = notifications
+        } else {
+            self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
+                // let categoryMatch = (scope == "All") || (notification.alert == scope)
+                let stringMatch = notification.alert.rangeOfString(searchController.searchBar.text!)
+                return (stringMatch != nil)
+            })
+        }
+        self.tableView.reloadData()
+    }
+    
 }
 
 

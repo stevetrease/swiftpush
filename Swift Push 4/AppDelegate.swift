@@ -22,9 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIDevice.currentDevice().batteryMonitoringEnabled = true
         
-        let item = NotificationData()
+        var item = NotificationData()
         item.alert = "Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name
         notifications.insert(item, atIndex: 0)
+        
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.SpellOutStyle
+        for i in 1...10 {
+            item = NotificationData()
+            item.alert = "test data " + formatter.stringFromNumber(i)!
+            notifications.insert(item, atIndex: 0)
+        }
         
         switch (application.applicationState) {
         case UIApplicationState.Active:
