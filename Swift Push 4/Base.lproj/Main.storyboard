@@ -67,28 +67,9 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Swift Push" id="hbG-7c-IhC"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="dxw-He-NIa" id="oCl-pX-9er"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Swift Push" id="zC9-kQ-Edd"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="c5m-kZ-LXa">
-                    <connections>
-                        <outlet property="delegate" destination="7bK-jq-Zjz" id="1pl-k1-n7y"/>
-                        <outlet property="searchContentsController" destination="7bK-jq-Zjz" id="2Gg-ET-Vox"/>
-                        <outlet property="searchResultsDataSource" destination="7bK-jq-Zjz" id="SvI-8l-H3y"/>
-                        <outlet property="searchResultsDelegate" destination="7bK-jq-Zjz" id="gUd-Rh-HoR"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="dxw-He-NIa">
-                    <connections>
-                        <outlet property="delegate" destination="7bK-jq-Zjz" id="vbG-y6-3ZK"/>
-                        <outlet property="searchContentsController" destination="7bK-jq-Zjz" id="s5x-aM-s8f"/>
-                        <outlet property="searchResultsDataSource" destination="7bK-jq-Zjz" id="FTk-zh-qN3"/>
-                        <outlet property="searchResultsDelegate" destination="7bK-jq-Zjz" id="r0K-OC-dt5"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="181" y="-404"/>
         </scene>

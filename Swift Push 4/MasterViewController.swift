@@ -30,10 +30,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
             controller.dimsBackgroundDuringPresentation = true
+            controller.hidesNavigationBarDuringPresentation = false
             controller.searchBar.sizeToFit()
             
             self.tableView.tableHeaderView = controller.searchBar
-            
             return controller
         })()
         
