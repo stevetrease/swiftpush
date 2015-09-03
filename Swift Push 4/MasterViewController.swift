@@ -104,7 +104,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         } else {
             self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
                 // let categoryMatch = (scope == "All") || (notification.alert == scope)
-                let stringMatch = notification.alert.rangeOfString(searchController.searchBar.text!)
+                let stringMatch = notification.alert.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString)
                 return (stringMatch != nil)
             })
         }
