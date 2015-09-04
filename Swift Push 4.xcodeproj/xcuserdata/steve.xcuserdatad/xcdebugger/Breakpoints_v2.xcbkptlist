@@ -2,4 +2,69 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swift Push 4/MasterViewController.swift"
+            timestampString = "463089341.421694"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "MasterViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swift_Push_4.MasterViewController.init (Swift_Push_4.MasterViewController.Type)(style : C.UITableViewStyle) -&gt; Swift_Push_4.MasterViewController"
+                  moduleName = "Swift Push 4"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/steve/Dropbox/Documents/Development/XCode/Swift%20Push/Swift%20Push%204/MasterViewController.swift"
+                  timestampString = "463089657.523228"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "25">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swift_Push_4.MasterViewController.init (Swift_Push_4.MasterViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; Swift_Push_4.MasterViewController"
+                  moduleName = "Swift Push 4"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/steve/Dropbox/Documents/Development/XCode/Swift%20Push/Swift%20Push%204/MasterViewController.swift"
+                  timestampString = "463089657.523375"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "67">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swift_Push_4.MasterViewController.init (Swift_Push_4.MasterViewController.Type)(coder : ObjectiveC.NSCoder) -&gt; Swift.Optional&lt;Swift_Push_4.MasterViewController&gt;"
+                  moduleName = "Swift Push 4"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/steve/Dropbox/Documents/Development/XCode/Swift%20Push/Swift%20Push%204/MasterViewController.swift"
+                  timestampString = "463089657.523513"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "27">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

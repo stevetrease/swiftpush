@@ -9,6 +9,8 @@
 import UIKit
 
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
+    
+    @IBOutlet weak var countLabel: UILabel!
 
     var filteredNotifications = [NotificationData]()
     var resultSearchController = UISearchController()
@@ -32,7 +34,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             controller.dimsBackgroundDuringPresentation = false
             controller.hidesNavigationBarDuringPresentation = false
             controller.searchBar.sizeToFit()
-            
+        
             self.tableView.tableHeaderView = controller.searchBar
             return controller
         })()
@@ -59,10 +61,17 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.resultSearchController.active) {
             print("filtered")
+            if ((self.filteredNotifications.count == 0) || (notifications.count == self.filteredNotifications.count)) {
+                countLabel.hidden = true
+            } else {
+                countLabel.hidden = false
+                countLabel.text = "\(self.filteredNotifications.count) of \(notifications.count)"
+            }
             return self.filteredNotifications.count
         }
         else {
             print("unfiltered")
+            countLabel.hidden = true
             return notifications.count
         }
     }
