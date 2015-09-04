@@ -87,7 +87,16 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         
         cell.textLabel?.text = notification.alert as String
         cell.detailTextLabel?.text = NSDateFormatter.localizedStringFromDate(notification.timeStampSent, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String
-            + " (\(notification.messageID))"
+            
+        if (notification.messageID != 0) {
+            cell.detailTextLabel!.text = cell.detailTextLabel!.text! + " (\(notification.messageID))"
+        }
+        
+        if(indexPath.row % 2 == 0){
+            cell.backgroundColor = UIColor.whiteColor()
+        } else{
+            cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.20)
+        }
         
         return cell
     }
@@ -104,7 +113,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         } else {
             self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
                 // let categoryMatch = (scope == "All") || (notification.alert == scope)
-                let stringMatch = notification.alert.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString)
+                let stringMatch = notification.alert.rangeOfString(searchController.searchBar.text!, options: .CaseInsensitiveSearch)
                 return (stringMatch != nil)
             })
         }

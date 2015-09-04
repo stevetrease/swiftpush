@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         item.alert = "Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name
         notifications.insert(item, atIndex: 0)
         
-        // display an additional set of test messages
-        /*
+        // display an additional set of test notifications
+        
         let formatter = NSNumberFormatter()
         formatter.numberStyle = NSNumberFormatterStyle.SpellOutStyle
         for i in 1...10 {
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             item.alert = "test data " + formatter.stringFromNumber(i)!
             notifications.insert(item, atIndex: 0)
         }
-        */
+        
         
         let types: UIUserNotificationType =
         [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
