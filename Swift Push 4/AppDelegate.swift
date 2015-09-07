@@ -114,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? String {
                 item.alert = alert
+                item.message = alert
                 print ("alert: \(alert)")
             }
         }

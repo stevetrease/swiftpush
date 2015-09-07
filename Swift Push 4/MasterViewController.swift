@@ -94,7 +94,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
         
-        cell.textLabel?.text = notification.alert as String
+        cell.textLabel?.text = notification.message as String
         cell.detailTextLabel?.text = NSDateFormatter.localizedStringFromDate(notification.timeStampSent, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String
             
         if (notification.messageID != 0) {
@@ -122,7 +122,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         } else {
             self.filteredNotifications = notifications.filter({( notification: NotificationData) -> Bool in
                 // let categoryMatch = (scope == "All") || (notification.alert == scope)
-                let stringMatch = notification.alert.rangeOfString(searchController.searchBar.text!, options: .CaseInsensitiveSearch)
+                let stringMatch = notification.message.rangeOfString(searchController.searchBar.text!, options: .CaseInsensitiveSearch)
                 return (stringMatch != nil)
             })
         }
