@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // display initial startup message
         var item = NotificationData()
         item.alert = "Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name
+        item.message = item.alert
         notifications.insert(item, atIndex: 0)
         
         // display an additional set of test notifications
@@ -41,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for i in 1...10 {
             item = NotificationData()
             item.alert = "test data " + formatter.stringFromNumber(i)!
+            item.message = item.alert
             notifications.insert(item, atIndex: 0)
         }
         */
@@ -60,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("screenshot taken")
             item = NotificationData()
             item.alert = "screenshot taken"
+            item.message = item.alert
             item.timeStampSent = NSDate ()
             notifications.insert(item, atIndex: 0)
         }
@@ -114,7 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? String {
                 item.alert = alert
-                item.message = alert
                 print ("alert: \(alert)")
             }
         }
@@ -122,6 +124,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             item.messageID = messageID
             print ("messageID: \(messageID)")
         }
+        if let message = userInfo["payload"] as? String {
+            item.message = message
+            print ("message: \(message)")
+        }
+    
         if let timeStamp = userInfo["timestamp"] as? NSTimeInterval {
             item.timeStampSent = NSDate (timeIntervalSince1970: timeStamp)
             print ("timestamp: \(timeStamp)")
