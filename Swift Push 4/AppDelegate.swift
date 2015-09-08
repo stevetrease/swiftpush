@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         bodyData += "&device=\(UIDevice.currentDevice().name)"
         bodyData += "&mode=\(mode!)"
         bodyData += "&version=\(versionNumber!)"
+        bodyData += "&type=iOS"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
