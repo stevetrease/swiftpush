@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notifications.insert(item, atIndex: 0)
         
         // display an additional set of test notifications
+
         /*
         let formatter = NSNumberFormatter()
         formatter.numberStyle = NSNumberFormatterStyle.SpellOutStyle
@@ -49,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             notifications.insert(item, atIndex: 0)
         }
         */
-        
         
         let types: UIUserNotificationType =
         [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
