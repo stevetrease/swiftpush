@@ -101,11 +101,20 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             cell.detailTextLabel!.text = cell.detailTextLabel!.text! + " (\(notification.messageID))"
         }
         
-        if(indexPath.row % 2 == 0){
+        // highlight alert messages in lightgray.
+        if notification.alert == "" {
             cell.backgroundColor = UIColor.whiteColor()
-        } else{
-            cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.20)
+        } else {
+            cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.2)
         }
+
+        /*
+        if(indexPath.row % 2 == 0){
+            cell.backgroundColor = cell.backgroundColor!.colorWithAlphaComponent(0.10)
+        } else{
+            cell.backgroundColor = cell.backgroundColor!.colorWithAlphaComponent(0.20)
+        }
+        */
         
         return cell
     }

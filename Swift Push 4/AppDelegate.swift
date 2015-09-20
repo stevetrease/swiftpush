@@ -43,6 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             item = NotificationData()
             item.alert = "test data " + formatter.stringFromNumber(i)!
             item.message = item.alert
+            if (i % 3 == 0) {
+                item.alert = ""
+            }
             notifications.insert(item, atIndex: 0)
         }
         */

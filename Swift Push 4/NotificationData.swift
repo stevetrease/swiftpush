@@ -18,4 +18,8 @@ class NotificationData {
     var timeStampSent = NSDate()
     var timeStampReceived = NSDate()
     var messageID: Int = 0
+    enum messageType {
+        case alert
+        case message
+    }
 }
