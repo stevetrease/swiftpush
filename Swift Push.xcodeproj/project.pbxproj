@@ -13,6 +13,8 @@
 		AA7D0F711C174338007F53F3 /* Swift_Push.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA7D0F6F1C174338007F53F3 /* Swift_Push.xcdatamodeld */; };
 		AA7D0F731C174338007F53F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7D0F721C174338007F53F3 /* Assets.xcassets */; };
 		AA7D0F761C174338007F53F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7D0F741C174338007F53F3 /* LaunchScreen.storyboard */; };
+		AAC65BF81C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC65BF61C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift */; };
+		AAC65BF91C1743BD00AD4836 /* PushMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC65BF71C1743BD00AD4836 /* PushMessages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		AA7D0F721C174338007F53F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA7D0F751C174338007F53F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA7D0F771C174338007F53F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAC65BF61C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PushMessages+CoreDataProperties.swift"; path = "Swift Push/PushMessages+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AAC65BF71C1743BD00AD4836 /* PushMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushMessages.swift; path = "Swift Push/PushMessages.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,8 @@
 		AA7D0F5C1C174338007F53F3 = {
 			isa = PBXGroup;
 			children = (
+				AAC65BF61C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift */,
+				AAC65BF71C1743BD00AD4836 /* PushMessages.swift */,
 				AA7D0F671C174338007F53F3 /* Swift Push */,
 				AA7D0F661C174338007F53F3 /* Products */,
 			);
@@ -77,6 +83,7 @@
 				AA7D0F611C174338007F53F3 /* Sources */,
 				AA7D0F621C174338007F53F3 /* Frameworks */,
 				AA7D0F631C174338007F53F3 /* Resources */,
+				AAC65BFA1C174A0E00AD4836 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -99,6 +106,11 @@
 				TargetAttributes = {
 					AA7D0F641C174338007F53F3 = {
 						CreatedOnToolsVersion = 7.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -133,6 +145,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AAC65BFA1C174A0E00AD4836 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Builda Phases Tab\n# 3. Select:aAdd Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:DefaultValue $buildNumber\" \"${PROJECT_DIR}/Swift Push/Settings.bundle/Root.plist\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AA7D0F611C174338007F53F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -141,6 +169,8 @@
 				AA7D0F711C174338007F53F3 /* Swift_Push.xcdatamodeld in Sources */,
 				AA7D0F6B1C174338007F53F3 /* ViewController.swift in Sources */,
 				AA7D0F691C174338007F53F3 /* AppDelegate.swift in Sources */,
+				AAC65BF81C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift in Sources */,
+				AAC65BF91C1743BD00AD4836 /* PushMessages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,7 +285,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Swift Push/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "eu.trease.www.Swift-Push";
+				PRODUCT_BUNDLE_IDENTIFIER = eu.trease.www.swift.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -266,7 +296,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Swift Push/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "eu.trease.www.Swift-Push";
+				PRODUCT_BUNDLE_IDENTIFIER = eu.trease.www.swift.push;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -290,6 +320,7 @@
 				AA7D0F7C1C174338007F53F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
