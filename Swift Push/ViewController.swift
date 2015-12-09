@@ -91,7 +91,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.detailTextLabel!.numberOfLines = 0
         cell.detailTextLabel!.text = NSDateFormatter.localizedStringFromDate((record.valueForKey("timeReceived") as? NSDate)!, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String
-
+        
+        /* if let value = record.valueForKey("isAlert") {
+            if (value as! Bool) {
+                print ("true")
+            } else{
+                print ("false")
+                cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.2)
+            }
+        }
+        */
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -157,15 +166,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
 
-func newRecord (text: String) {
+func newRecord (messageText: String, alert: Bool) {
     let entity = NSEntityDescription.entityForName("PushMessages", inManagedObjectContext: context)
     
     // Initialize Record
     let record = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: context)
     
     // Populate Record
-    record.setValue(text, forKey: "messageText")
+    record.setValue(messageText, forKey: "messageText")
     record.setValue(NSDate(), forKey: "timeReceived")
+    record.setValue(alert, forKey: "isAlert")
     
     do {
         try record.managedObjectContext?.save()
