@@ -14,7 +14,9 @@ import CoreData
 
 extension PushMessages {
 
-    @NSManaged var timeReceived: NSDate?
     @NSManaged var messageText: String?
+    @NSManaged var timeReceived: NSDate?
+    @NSManaged var alertText: String?
+    @NSManaged var isAlert: NSNumber?
 
 }
