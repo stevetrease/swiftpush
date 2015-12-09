@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest(entityName: "PushMessages")
+        fetchRequest.fetchBatchSize = 100
         
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: "timeReceived", ascending: false)
