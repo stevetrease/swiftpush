@@ -42,12 +42,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             context = self.managedObjectContext
         }
         
-        newRecord("Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name)
-
-        
+        // count records and display in startup message
+        let fetch = NSFetchRequest (entityName: "PushMessages")
+        do {
+            let records = try self.managedObjectContext.executeFetchRequest(fetch)
+            newRecord("Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name + " with \(records.count) records")
+        } catch {
+            let fetchError = error as NSError
+            print("\(fetchError), \(fetchError.userInfo)")
+        }
+ 
         // Configure Window
         window?.rootViewController = rootNavigationController
         
+        // setup push notifications
         let types: UIUserNotificationType =
         [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
         
