@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: "sectionCriteria", cacheName: nil)
         
         // Configure Fetched Results Controller
         fetchedResultsController.delegate = self
@@ -59,8 +59,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let sections = fetchedResultsController.sections {
             return sections.count
         }
-        
         return 0
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sections = fetchedResultsController.sections {
+            let currentSection = sections[section]
+            return currentSection.name
+        }
+        return nil
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,7 +75,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects
         }
-        
         return 0
     }
     
@@ -77,7 +83,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Configure Table View Cell
         configureCell(cell, atIndexPath: indexPath)
-        
         return cell
     }
     
