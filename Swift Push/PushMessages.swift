@@ -21,8 +21,10 @@ class PushMessages: NSManagedObject {
             
             if (dayReceived == dayToday) {
                 return "Today"
+            } else if (dayReceived == cal.dateByAddingUnit([.Day], value: -1, toDate: dayToday!, options: [])) {
+                return "Yesterday"
             } else {
-                    return NSDateFormatter.localizedStringFromDate(dayReceived!, dateStyle: .MediumStyle, timeStyle: .NoStyle) as String
+                return NSDateFormatter.localizedStringFromDate(dayReceived!, dateStyle: .MediumStyle, timeStyle: .NoStyle) as String
             }
         }
     }

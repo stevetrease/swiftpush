@@ -138,7 +138,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.endUpdates()
     }
     
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        print ("didChangeSection")
+        switch type {
+        case .Insert:
+            let sectionIndexSet = NSIndexSet(index: sectionIndex)
+            self.tableView.insertSections(sectionIndexSet, withRowAnimation: UITableViewRowAnimation.Fade)
+        case .Delete:
+            let sectionIndexSet = NSIndexSet(index: sectionIndex)
+            self.tableView.deleteSections(sectionIndexSet, withRowAnimation: UITableViewRowAnimation.Fade)
+        default:
+            ""
+        }
+    }
+    
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        print ("didChangeObject")
         switch (type) {
         case .Insert:
             if let indexPath = newIndexPath {
@@ -160,7 +175,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let indexPath = indexPath {
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
-            
             if let newIndexPath = newIndexPath {
                 tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
             }
