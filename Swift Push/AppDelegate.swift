@@ -51,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")
         }
+        
+        // newRecord("Test alert", alert: true)
+        // newRecord("Test message", alert: false)
  
         // Configure Window
         window?.rootViewController = rootNavigationController

@@ -92,20 +92,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.text = record.valueForKey("messageText") as? String
-        cell.layer.masksToBounds = true
+        // cell.layer.masksToBounds = true
         
         cell.detailTextLabel!.numberOfLines = 0
         cell.detailTextLabel!.text = NSDateFormatter.localizedStringFromDate((record.valueForKey("timeReceived") as? NSDate)!, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String
         
-        /* if let value = record.valueForKey("isAlert") {
+        //if ((record.valueForKey("isAlert") ?? false) != nil) {
+        //     cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.2)
+        //}
+        
+        if let value = record.valueForKey("isAlert") {
             if (value as! Bool) {
+                cell.textLabel!.font = cell.textLabel!.font.boldItalic()
+                //cell.backgroundColor = UIColor.lightGrayColor()
                 print ("true")
             } else{
                 print ("false")
-                cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.2)
             }
         }
-        */
+        
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -202,6 +207,24 @@ func newRecord (messageText: String, alert: Bool) {
         let saveError = error as NSError
         print("\(saveError), \(saveError.userInfo)")
     }
+}
+
+
+
+
+
+extension UIFont {
+    
+    func withTraits(traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
+        let descriptor = self.fontDescriptor()
+            .fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
+        return UIFont(descriptor: descriptor, size: 0)
+    }
+    
+    func boldItalic() -> UIFont {
+        return withTraits(.TraitBold, .TraitCondensed)
+    }
+    
 }
 
 
