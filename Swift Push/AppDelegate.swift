@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+var maximumRecords = 1000
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -28,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
         print ("version \(versionNumber!)")
         
-        
         // Fetch Main Storyboard
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -46,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fetch = NSFetchRequest (entityName: "PushMessages")
         do {
             let records = try self.managedObjectContext.executeFetchRequest(fetch)
-            newRecord("Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name + " with \(records.count) records", alert: true)
+            newRecord("Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name + " with \(records.count) of \(maximumRecords) records", alert: true)
         } catch {
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")

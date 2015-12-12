@@ -97,19 +97,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.detailTextLabel!.numberOfLines = 0
         cell.detailTextLabel!.text = NSDateFormatter.localizedStringFromDate((record.valueForKey("timeReceived") as? NSDate)!, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String
         
-        //if ((record.valueForKey("isAlert") ?? false) != nil) {
-        //     cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.2)
-        //}
-        
-        if let value = record.valueForKey("isAlert") {
-            if (value as! Bool) {
-                cell.textLabel!.font = cell.textLabel!.font.boldItalic()
-                //cell.backgroundColor = UIColor.lightGrayColor()
-                print ("true")
-            } else{
-                print ("false")
-            }
-        }
+//        if let value = record.valueForKey("isAlert") {
+//            if (value as! Bool) {
+//                cell.textLabel!.font = cell.textLabel!.font.boldItalic()
+//            }
+//        }
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -200,6 +192,19 @@ func newRecord (messageText: String, alert: Bool) {
     record.setValue(NSDate(), forKey: "timeReceived")
     record.setValue(alert, forKey: "isAlert")
     
+    // check we don't have too many records
+    let fetch = NSFetchRequest (entityName: "PushMessages")
+    do {
+        let records = try context.executeFetchRequest(fetch)
+        if records.count > maximumRecords {
+            print ("too many records (\(records.count) of \(maximumRecords))")
+        }
+    } catch {
+        let fetchError = error as NSError
+        print("\(fetchError), \(fetchError.userInfo)")
+    }
+    
+    // save the changed table
     do {
         try record.managedObjectContext?.save()
     } catch {
