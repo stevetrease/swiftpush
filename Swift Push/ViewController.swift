@@ -110,7 +110,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print ("false")
             }
         }
-        
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -214,17 +213,14 @@ func newRecord (messageText: String, alert: Bool) {
 
 
 extension UIFont {
-    
     func withTraits(traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
         let descriptor = self.fontDescriptor()
             .fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
         return UIFont(descriptor: descriptor, size: 0)
     }
-    
     func boldItalic() -> UIFont {
         return withTraits(.TraitBold, .TraitCondensed)
     }
-    
 }
 
 
