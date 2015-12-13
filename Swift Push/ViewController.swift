@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let ReuseIdentifierToDoCell = "Cell"
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var alertSwitch: UISwitch!
 
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
@@ -177,6 +178,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             break;
         }
     }
+    
+    
+    @IBAction func alertSwitch(sender: AnyObject) {
+        print("alert switch state is \(alertSwitch.on)")
+    }
 }
 
 
@@ -212,21 +218,3 @@ func newRecord (messageText: String, alert: Bool) {
         print("\(saveError), \(saveError.userInfo)")
     }
 }
-
-
-
-
-
-extension UIFont {
-    func withTraits(traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
-        let descriptor = self.fontDescriptor()
-            .fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
-        return UIFont(descriptor: descriptor, size: 0)
-    }
-    func boldItalic() -> UIFont {
-        return withTraits(.TraitBold, .TraitCondensed)
-    }
-}
-
-
-
