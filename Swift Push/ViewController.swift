@@ -98,11 +98,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.detailTextLabel!.numberOfLines = 0
         cell.detailTextLabel!.text = NSDateFormatter.localizedStringFromDate((record.valueForKey("timeReceived") as? NSDate)!, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String
         
-//        if let value = record.valueForKey("isAlert") {
-//            if (value as! Bool) {
-//                cell.textLabel!.font = cell.textLabel!.font.boldItalic()
-//            }
-//        }
+        if let value = record.valueForKey("isAlert") {
+            if (value as! Bool) {
+                cell.backgroundColor = UIColor.whiteColor()
+            } else {
+                cell.backgroundColor = cell.backgroundColor!.colorWithAlphaComponent(0.05)
+            }
+        }
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
