@@ -16,6 +16,7 @@
 		AA7D0F761C174338007F53F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7D0F741C174338007F53F3 /* LaunchScreen.storyboard */; };
 		AAC65BF81C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC65BF61C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift */; };
 		AAC65BF91C1743BD00AD4836 /* PushMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC65BF71C1743BD00AD4836 /* PushMessages.swift */; };
+		AAE727981C1F5EE9006EADEF /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAE727971C1F5EE9006EADEF /* background.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		AA7D0F771C174338007F53F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAC65BF61C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PushMessages+CoreDataProperties.swift"; path = "Swift Push/PushMessages+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AAC65BF71C1743BD00AD4836 /* PushMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushMessages.swift; path = "Swift Push/PushMessages.swift"; sourceTree = "<group>"; };
+		AAE727971C1F5EE9006EADEF /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 		AA7D0F671C174338007F53F3 /* Swift Push */ = {
 			isa = PBXGroup;
 			children = (
+				AAE727971C1F5EE9006EADEF /* background.jpg */,
 				AA7D0F681C174338007F53F3 /* AppDelegate.swift */,
 				AA7D0F6A1C174338007F53F3 /* ViewController.swift */,
 				AA7D0F6C1C174338007F53F3 /* Main.storyboard */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA7D0F761C174338007F53F3 /* LaunchScreen.storyboard in Resources */,
+				AAE727981C1F5EE9006EADEF /* background.jpg in Resources */,
 				AA7D0F731C174338007F53F3 /* Assets.xcassets in Resources */,
 				AA302C361C1CB74500272E96 /* README.txt in Resources */,
 				AA7D0F6E1C174338007F53F3 /* Main.storyboard in Resources */,
