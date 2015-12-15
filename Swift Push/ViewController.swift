@@ -100,9 +100,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if let value = record.valueForKey("isAlert") {
             if (value as! Bool) {
-                cell.backgroundColor = UIColor.whiteColor()
+                cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.05)
             } else {
-                cell.backgroundColor = cell.backgroundColor!.colorWithAlphaComponent(0.05)
+                cell.backgroundColor = UIColor.whiteColor()
             }
         }
     }
