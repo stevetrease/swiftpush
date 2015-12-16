@@ -52,6 +52,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")
         }
+        
+        
+        // let bounds = self.navigationController?.navigationBar.bounds as CGRect!
+        // let visualEffectView = UIVisualEffectView (effect: UIBlurEffect (style: .Light)) as UIVisualEffectView
+        // visualEffectView.frame = bounds
+        // visualEffectView.autoresizingMask = .FlexibleHeight | .FlexibleWidth
+        // self.navigationController?.navigationBar.addSubview(visualEffectView)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.lightGrayColor()
+        self.navigationController?.navigationBar.translucent = true
+    
+        
     }
     
     // MARK: -
@@ -100,9 +112,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if let value = record.valueForKey("isAlert") {
             if (value as! Bool) {
-                cell.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.05)
+                cell.backgroundColor = UIColor(red: 255 / 255, green: 242 / 255 , blue: 204 / 255, alpha: 1)
             } else {
-                cell.backgroundColor = UIColor.whiteColor()
+                cell.backgroundColor = UIColor(red: 217 / 255, green: 234 / 255 , blue: 211 / 255, alpha: 1)
             }
         }
     }
