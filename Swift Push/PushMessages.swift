@@ -17,15 +17,16 @@ class PushMessages: NSManagedObject {
         get {
             let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
             let dayReceived = cal.dateFromComponents(cal.components([.Day , .Month, .Year ], fromDate: timeReceived!))
+
             let dayToday = cal.dateFromComponents(cal.components([.Day , .Month, .Year ], fromDate: NSDate()))
             
             if (dayReceived == dayToday) {
                 return "Today"
             } else if (dayReceived == cal.dateByAddingUnit([.Day], value: -1, toDate: dayToday!, options: [])) {
                 return "Yesterday"
-            } else {
-                return NSDateFormatter.localizedStringFromDate(dayReceived!, dateStyle: .MediumStyle, timeStyle: .NoStyle) as String
             }
+            // otherwise just use date for section header
+            return NSDateFormatter.localizedStringFromDate(dayReceived!, dateStyle: .MediumStyle, timeStyle: .NoStyle) as String
         }
     }
 }
