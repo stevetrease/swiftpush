@@ -217,7 +217,25 @@ func newRecord (messageText: String, alert: Bool) {
     do {
         let records = try context.executeFetchRequest(fetch)
         if records.count > maximumRecords {
+            // if we have too many reorcrds, delete them down to MaximumRecords
             print ("too many records (\(records.count) of \(maximumRecords))")
+            
+            let deleteFetchRequest = NSFetchRequest(entityName: "PushMessages")
+            deleteFetchRequest.fetchLimit = records.count - maximumRecords
+
+            let sortDescriptor = NSSortDescriptor(key: "timeReceived", ascending: true)
+            deleteFetchRequest.sortDescriptors = [sortDescriptor]
+            
+            do {
+                let deleteFetchResults = try context.executeFetchRequest (deleteFetchRequest)
+
+                    for var delRecord in deleteFetchResults {
+                    context.deleteObject(delRecord as! NSManagedObject)
+                }
+            } catch {
+                let fetchError = error as NSError
+                print("\(fetchError), \(fetchError.userInfo)")
+            }
         }
     } catch {
         let fetchError = error as NSError
