@@ -201,7 +201,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
 
-func newRecord (messageText: String, alert: Bool) {
+func newRecord (messageText: String, alert: Bool,  messageID: Int) {
     let entity = NSEntityDescription.entityForName("PushMessages", inManagedObjectContext: context)
     
     // Initialize Record
@@ -211,6 +211,7 @@ func newRecord (messageText: String, alert: Bool) {
     record.setValue(messageText, forKey: "messageText")
     record.setValue(NSDate(), forKey: "timeReceived")
     record.setValue(alert, forKey: "isAlert")
+    record.setValue(messageID, forKey: "messageID")
     
     // check we don't have too many records
     let fetch = NSFetchRequest (entityName: "PushMessages")

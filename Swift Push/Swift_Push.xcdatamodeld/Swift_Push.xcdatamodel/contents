@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C48a" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D9c" minimumToolsVersion="Automatic">
     <entity name="PushMessages" representedClassName=".PushMessages" syncable="YES">
         <attribute name="alertText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isAlert" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="messageID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="messageText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeReceived" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PushMessages" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="PushMessages" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

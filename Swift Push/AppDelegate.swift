@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fetch = NSFetchRequest (entityName: "PushMessages")
         do {
             let records = try self.managedObjectContext.executeFetchRequest(fetch)
-            newRecord("Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name + " with \(records.count) of \(maximumRecords) records", alert: true)
+            newRecord("Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name + " with \(records.count) of \(maximumRecords) records", alert: true, messageID: 0)
         } catch {
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             isAlert = true
         }
         
-        newRecord(messageStringFinal, alert: isAlert)
+        newRecord(messageStringFinal, alert: isAlert, messageID: messageIDFinal)
         
         // finished
         completionHandler(UIBackgroundFetchResult.NewData)
