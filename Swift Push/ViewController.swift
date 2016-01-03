@@ -12,31 +12,17 @@ import CoreData
 var context: NSManagedObjectContext!
 
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
     let ReuseIdentifierToDoCell = "Cell"
+    
+    var searchResultsController = UISearchController()
+    var searchPredicate: NSPredicate?
+    var fetchedResultsController: NSFetchedResultsController?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var alertSwitch: UISwitch!
 
-    
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest(entityName: "PushMessages")
-        fetchRequest.fetchBatchSize = 100
-        
-        // Add Sort Descriptors
-        let sortDescriptor = NSSortDescriptor(key: "timeReceived", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: "sectionCriteria", cacheName: nil)
-        
-        // Configure Fetched Results Controller
-        fetchedResultsController.delegate = self
-        
-        return fetchedResultsController
-    }()
     
     // MARK: -
     // MARK: View Life Cycle
@@ -46,13 +32,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: allRecordsFetchRequest(""), managedObjectContext: context, sectionNameKeyPath: "sectionCriteria", cacheName: nil)
+        fetchedResultsController?.delegate = self
+        
         do {
-            try self.fetchedResultsController.performFetch()
+            try self.fetchedResultsController!.performFetch()
         } catch {
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")
         }
-        
         
         // let bounds = self.navigationController?.navigationBar.bounds as CGRect!
         // let visualEffectView = UIVisualEffectView (effect: UIBlurEffect (style: .Light)) as UIVisualEffectView
@@ -62,21 +50,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.navigationController?.navigationBar.barTintColor = UIColor.lightGrayColor()
         self.navigationController?.navigationBar.translucent = true
-    
         
+        self.searchResultsController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = false
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.searchBar.sizeToFit()
+            
+            self.tableView.tableHeaderView = controller.searchBar
+            return controller
+        })()
     }
     
     // MARK: -
     // MARK: Table View Data Source Methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let sections = fetchedResultsController.sections {
+        if let sections = fetchedResultsController!.sections {
             return sections.count
         }
         return 0
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let sections = fetchedResultsController.sections {
+        if let sections = fetchedResultsController!.sections {
             let currentSection = sections[section]
             return currentSection.name
         }
@@ -84,7 +81,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections = fetchedResultsController.sections {
+        if let sections = fetchedResultsController!.sections {
             let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects
         }
@@ -101,7 +98,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         // Fetch Record
-        let record = fetchedResultsController.objectAtIndexPath(indexPath)
+        print ("configureCell \(indexPath)")
+        let record = fetchedResultsController!.objectAtIndexPath(indexPath)
         
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.text = record.valueForKey("messageText") as? String
@@ -126,7 +124,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == .Delete) {
             // Fetch Record
-            let record = fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
+            let record = fetchedResultsController!.objectAtIndexPath(indexPath) as! NSManagedObject
             
             // Delete Record
             context.deleteObject(record)
@@ -142,6 +140,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: -
     // MARK: Fetched Results Controller Delegate Methods
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        // let tableView = controller == fetchedResultsController ? self.tableView : searchDisplayController?.searchResultsTableView
         tableView.beginUpdates()
     }
     
@@ -197,7 +196,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func alertSwitch(sender: AnyObject) {
         print("alert switch state is \(alertSwitch.on)")
     }
+
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController)
+    {
+        let searchText = searchController.searchBar.text!
+        print("updateSearchResultsForSearchController: \(searchText.characters.count) \(searchText)")
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: allRecordsFetchRequest(searchText), managedObjectContext: context, sectionNameKeyPath: "sectionCriteria", cacheName: nil)
+        do {
+            try self.fetchedResultsController!.performFetch()
+            self.tableView.reloadData()
+        } catch {
+            let fetchError = error as NSError
+            print("\(fetchError), \(fetchError.userInfo)")
+        }
+    }
 }
+
+
+
 
 
 
@@ -250,4 +268,30 @@ func newRecord (messageText: String, alert: Bool,  messageID: Int) {
         let saveError = error as NSError
         print("\(saveError), \(saveError.userInfo)")
     }
+}
+
+
+func allRecordsFetchRequest(searchText: String) -> NSFetchRequest {
+    print ("allRecordsFetchRequest \(searchText)")
+    let fetchRequest = NSFetchRequest(entityName: "PushMessages")
+    
+    fetchRequest.fetchBatchSize = 100
+    let sortDescriptor = NSSortDescriptor(key: "timeReceived", ascending: false)
+    fetchRequest.sortDescriptors = [sortDescriptor]
+    
+    if (searchText.characters.count != 0) {
+        fetchRequest.predicate = NSPredicate(format: "messageText contains[c] %@", searchText)
+    } else {
+        fetchRequest.predicate = nil
+    }
+    
+    do {
+        let records = try context.executeFetchRequest(fetchRequest)
+        print (records.count)
+    } catch {
+        let fetchError = error as NSError
+        print("\(fetchError), \(fetchError.userInfo)")
+    }
+    
+    return fetchRequest
 }
