@@ -42,12 +42,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("\(fetchError), \(fetchError.userInfo)")
         }
         
-        // let bounds = self.navigationController?.navigationBar.bounds as CGRect!
-        // let visualEffectView = UIVisualEffectView (effect: UIBlurEffect (style: .Light)) as UIVisualEffectView
-        // visualEffectView.frame = bounds
-        // visualEffectView.autoresizingMask = .FlexibleHeight | .FlexibleWidth
-        // self.navigationController?.navigationBar.addSubview(visualEffectView)
-        
         self.navigationController?.navigationBar.barTintColor = UIColor.lightGrayColor()
         self.navigationController?.navigationBar.translucent = true
         
@@ -56,6 +50,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             controller.searchResultsUpdater = self
             controller.dimsBackgroundDuringPresentation = false
             controller.hidesNavigationBarDuringPresentation = false
+            controller.searchBar.autocapitalizationType = .None
             controller.searchBar.sizeToFit()
             
             self.tableView.tableHeaderView = controller.searchBar
@@ -98,7 +93,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         // Fetch Record
-        print ("configureCell \(indexPath)")
+        // print ("configureCell \(indexPath)")
         let record = fetchedResultsController!.objectAtIndexPath(indexPath)
         
         cell.textLabel!.numberOfLines = 0
