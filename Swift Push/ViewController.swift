@@ -242,8 +242,7 @@ func newRecord (messageText: String, alert: Bool,  messageID: Int) {
             
             do {
                 let deleteFetchResults = try context.executeFetchRequest (deleteFetchRequest)
-
-                    for var delRecord in deleteFetchResults {
+                for var delRecord in deleteFetchResults {
                     context.deleteObject(delRecord as! NSManagedObject)
                 }
             } catch {
