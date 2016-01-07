@@ -75,6 +75,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return nil
     }
     
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if let sections = fetchedResultsController!.sections {
+            let sectionInfo = sections[section]
+            return ("\(sectionInfo.numberOfObjects)")
+        }
+        return nil
+    }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController!.sections {
             let sectionInfo = sections[section]
