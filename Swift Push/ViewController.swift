@@ -21,7 +21,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var fetchedResultsController: NSFetchedResultsController?
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var alertSwitch: UISwitch!
 
     
     // MARK: -
@@ -195,12 +194,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    
-    @IBAction func alertSwitch(sender: AnyObject) {
-        print("alert switch state is \(alertSwitch.on)")
-    }
-
-    
+        
     func updateSearchResultsForSearchController(searchController: UISearchController)
     {
         let searchText = searchController.searchBar.text!
