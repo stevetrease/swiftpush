@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>DefaultValue</key>
-			<integer>404</integer>
+			<integer>405</integer>
 			<key>Key</key>
 			<string>maximumRecords</string>
 			<key>MaximumValue</key>
