@@ -80,6 +80,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSUserDefaults.standardUserDefaults().setObject(deviceToken.description as String, forKey:"deviceToken")
         NSUserDefaults.standardUserDefaults().synchronize()
         
+        newRecord("Device token is \(deviceToken.description)", alert: false, messageID: 0)
+        
         let receipt = NSBundle.mainBundle().appStoreReceiptURL?.lastPathComponent
         let mode = receipt
         let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
