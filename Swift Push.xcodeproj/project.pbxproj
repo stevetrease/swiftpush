@@ -30,6 +30,7 @@
 		AA85DB161C2AB9B6005D032D /* Swift_Push.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Swift_Push.xcdatamodel; sourceTree = "<group>"; };
 		AAC65BF61C1743BD00AD4836 /* PushMessages+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PushMessages+CoreDataProperties.swift"; path = "Swift Push/PushMessages+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AAC65BF71C1743BD00AD4836 /* PushMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushMessages.swift; path = "Swift Push/PushMessages.swift"; sourceTree = "<group>"; };
+		AAE925CF1D1479390040DEBB /* Swift Push.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Swift Push.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 		AA7D0F671C174338007F53F3 /* Swift Push */ = {
 			isa = PBXGroup;
 			children = (
+				AAE925CF1D1479390040DEBB /* Swift Push.entitlements */,
 				AA7D0F681C174338007F53F3 /* AppDelegate.swift */,
 				AA7D0F6A1C174338007F53F3 /* ViewController.swift */,
 				AA7D0F6C1C174338007F53F3 /* Main.storyboard */,
@@ -114,6 +116,9 @@
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -239,7 +244,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -278,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -290,6 +295,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Swift Push/Swift Push.entitlements";
 				INFOPLIST_FILE = "Swift Push/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -303,6 +309,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Swift Push/Swift Push.entitlements";
 				INFOPLIST_FILE = "Swift Push/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
