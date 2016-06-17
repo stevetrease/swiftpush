@@ -13,11 +13,15 @@ import Foundation
 import CoreData
 
 extension PushMessages {
+    
+    @nonobjc class func fetchRequest() -> NSFetchRequest<PushMessages> {
+        return NSFetchRequest<PushMessages>(entityName: "PushMessages")
+    }
 
     @NSManaged var alertText: String?
     @NSManaged var isAlert: NSNumber?
     @NSManaged var messageText: String?
-    @NSManaged var timeReceived: NSDate?
+    @NSManaged var timeReceived: Date?
     @NSManaged var messageID: NSNumber?
 
 }

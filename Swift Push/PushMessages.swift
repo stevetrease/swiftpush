@@ -15,18 +15,18 @@ class PushMessages: NSManagedObject {
     
     var sectionCriteria: String {
         get {
-            let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-            let dayReceived = cal.dateFromComponents(cal.components([.Day , .Month, .Year ], fromDate: timeReceived!))
+            let cal = Calendar(calendarIdentifier: Calendar.Identifier.gregorian)!
+            let dayReceived = cal.date(from: cal.components([.day , .month, .year ], from: timeReceived! as Date))
 
-            let dayToday = cal.dateFromComponents(cal.components([.Day , .Month, .Year ], fromDate: NSDate()))
+            let dayToday = cal.date(from: cal.components([.day , .month, .year ], from: Date()))
             
             if (dayReceived == dayToday) {
                 return "Today"
-            } else if (dayReceived == cal.dateByAddingUnit([.Day], value: -1, toDate: dayToday!, options: [])) {
+            } else if (dayReceived == cal.date(byAdding: [.day], value: -1, to: dayToday!, options: [])) {
                 return "Yesterday"
             }
             // otherwise just use date for section header
-            return NSDateFormatter.localizedStringFromDate(dayReceived!, dateStyle: .MediumStyle, timeStyle: .NoStyle) as String
+            return DateFormatter.localizedString(from: dayReceived!, dateStyle: .mediumStyle, timeStyle: .noStyle) as String
         }
     }
 }

@@ -17,8 +17,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let ReuseIdentifierToDoCell = "Cell"
     
     var searchResultsController = UISearchController()
-    var searchPredicate: NSPredicate?
-    var fetchedResultsController: NSFetchedResultsController?
+    var searchPredicate: Predicate?
+    var fetchedResultsController: NSFetchedResultsController<PushMessages>?
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -41,15 +41,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("\(fetchError), \(fetchError.userInfo)")
         }
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.lightGrayColor()
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.barTintColor = UIColor.lightGray()
+        self.navigationController?.navigationBar.isTranslucent = true
         
         self.searchResultsController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
             controller.dimsBackgroundDuringPresentation = false
             controller.hidesNavigationBarDuringPresentation = false
-            controller.searchBar.autocapitalizationType = .None
+            controller.searchBar.autocapitalizationType = .none
             controller.searchBar.sizeToFit()
             
             self.tableView.tableHeaderView = controller.searchBar
@@ -59,14 +59,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: -
     // MARK: Table View Data Source Methods
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if let sections = fetchedResultsController!.sections {
             return sections.count
         }
         return 0
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let sections = fetchedResultsController!.sections {
             let currentSection = sections[section]
             return currentSection.name
@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return nil
     }
     
-    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if let sections = fetchedResultsController!.sections {
             let sectionInfo = sections[section]
             return ("\(sectionInfo.numberOfObjects)")
@@ -82,7 +82,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return nil
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController!.sections {
             let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects
@@ -90,112 +90,112 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierToDoCell, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifierToDoCell, for: indexPath)
         
         // Configure Table View Cell
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+    func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         // Fetch Record
         // print ("configureCell \(indexPath)")
-        let record = fetchedResultsController!.objectAtIndexPath(indexPath)
+        let record = fetchedResultsController!.object(at: indexPath)
         
         cell.textLabel!.numberOfLines = 0
-        cell.textLabel!.text = record.valueForKey("messageText") as? String
+        cell.textLabel!.text = record.value(forKey: "messageText") as? String
         // cell.layer.masksToBounds = true
         
         cell.detailTextLabel!.numberOfLines = 0
-        cell.detailTextLabel!.text = NSDateFormatter.localizedStringFromDate((record.valueForKey("timeReceived") as? NSDate)!, dateStyle: .MediumStyle, timeStyle: .ShortStyle) as String
+        cell.detailTextLabel!.text = DateFormatter.localizedString(from: (record.value(forKey: "timeReceived") as? Date)!, dateStyle: .mediumStyle, timeStyle: .shortStyle) as String
         
-        if let value = record.valueForKey("isAlert") {
+        if let value = record.value(forKey: "isAlert") {
             if (value as! Bool) {
                 cell.backgroundColor = UIColor(red: 245 / 255, green: 245 / 255 , blue: 245 / 255, alpha: 1)
             } else {
-                cell.backgroundColor = UIColor.whiteColor()
+                cell.backgroundColor = UIColor.white()
             }
         }
     }
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (editingStyle == .Delete) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
             // Fetch Record
-            let record = fetchedResultsController!.objectAtIndexPath(indexPath) as! NSManagedObject
+            let record = fetchedResultsController!.object(at: indexPath) as NSManagedObject
             
             // Delete Record
-            context.deleteObject(record)
+            context.delete(record)
         }
     }
     
     // MARK: -
     // MARK: Table View Delegate Methods
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: -
     // MARK: Fetched Results Controller Delegate Methods
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         // let tableView = controller == fetchedResultsController ? self.tableView : searchDisplayController?.searchResultsTableView
         tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         print ("didChangeSection")
         switch type {
-        case .Insert:
-            let sectionIndexSet = NSIndexSet(index: sectionIndex)
-            self.tableView.insertSections(sectionIndexSet, withRowAnimation: UITableViewRowAnimation.Fade)
-        case .Delete:
-            let sectionIndexSet = NSIndexSet(index: sectionIndex)
-            self.tableView.deleteSections(sectionIndexSet, withRowAnimation: UITableViewRowAnimation.Fade)
+        case .insert:
+            let sectionIndexSet = IndexSet(integer: sectionIndex)
+            self.tableView.insertSections(sectionIndexSet, with: UITableViewRowAnimation.fade)
+        case .delete:
+            let sectionIndexSet = IndexSet(integer: sectionIndex)
+            self.tableView.deleteSections(sectionIndexSet, with: UITableViewRowAnimation.fade)
         default:
-            ""
+            print ("default")
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         print ("didChangeObject")
         switch (type) {
-        case .Insert:
+        case .insert:
             if let indexPath = newIndexPath {
-                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                tableView.insertRows(at: [indexPath], with: .fade)
             }
             break;
-        case .Delete:
+        case .delete:
             if let indexPath = indexPath {
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             }
             break;
-        case .Update:
+        case .update:
             if let indexPath = indexPath {
-                let cell = tableView.cellForRowAtIndexPath(indexPath)
+                let cell = tableView.cellForRow(at: indexPath)
                 configureCell(cell!, atIndexPath: indexPath)
             }
             break;
-        case .Move:
+        case .move:
             if let indexPath = indexPath {
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             }
             if let newIndexPath = newIndexPath {
-                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+                tableView.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
         }
     }
     
         
-    func updateSearchResultsForSearchController(searchController: UISearchController)
+    func updateSearchResults(for searchController: UISearchController)
     {
         let searchText = searchController.searchBar.text!
         print("updateSearchResultsForSearchController: \(searchText.characters.count) \(searchText)")
@@ -216,36 +216,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
 
-func newRecord (messageText: String, alert: Bool,  messageID: Int) {
-    let entity = NSEntityDescription.entityForName("PushMessages", inManagedObjectContext: context)
+func newRecord (_ messageText: String, alert: Bool,  messageID: Int) {
+    let entity = NSEntityDescription.entity(forEntityName: "PushMessages", in: context)
     
     // Initialize Record
-    let record = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: context)
+    let record = NSManagedObject(entity: entity!, insertInto: context)
     
     // Populate Record
     record.setValue(messageText, forKey: "messageText")
-    record.setValue(NSDate(), forKey: "timeReceived")
+    record.setValue(Date(), forKey: "timeReceived")
     record.setValue(alert, forKey: "isAlert")
     record.setValue(messageID, forKey: "messageID")
     
     // check we don't have too many records
-    let fetch = NSFetchRequest (entityName: "PushMessages")
+    let fetch: NSFetchRequest<PushMessages> = PushMessages.fetchRequest()
+    // let fetch = NSFetchRequest (entityName: "PushMessages")
     do {
-        let records = try context.executeFetchRequest(fetch)
+        let records = try context.fetch(fetch)
         if records.count > maximumRecords {
             // if we have too many reorcrds, delete them down to MaximumRecords
             print ("too many records (\(records.count) of \(maximumRecords))")
             
-            let deleteFetchRequest = NSFetchRequest(entityName: "PushMessages")
+            let deleteFetchRequest: NSFetchRequest<PushMessages> = PushMessages.fetchRequest()
+            //let deleteFetchRequest = NSFetchRequest(entityName: "PushMessages")
             deleteFetchRequest.fetchLimit = records.count - maximumRecords
 
-            let sortDescriptor = NSSortDescriptor(key: "timeReceived", ascending: true)
+            let sortDescriptor = SortDescriptor(key: "timeReceived", ascending: true)
             deleteFetchRequest.sortDescriptors = [sortDescriptor]
             
             do {
-                let deleteFetchResults = try context.executeFetchRequest (deleteFetchRequest)
+                let deleteFetchResults = try context.fetch (deleteFetchRequest)
                 for var delRecord in deleteFetchResults {
-                    context.deleteObject(delRecord as! NSManagedObject)
+                    context.delete(delRecord as NSManagedObject)
                 }
             } catch {
                 let fetchError = error as NSError
@@ -267,22 +269,23 @@ func newRecord (messageText: String, alert: Bool,  messageID: Int) {
 }
 
 
-func allRecordsFetchRequest(searchText: String) -> NSFetchRequest {
+func allRecordsFetchRequest(_ searchText: String) -> NSFetchRequest<PushMessages> {
     print ("allRecordsFetchRequest \(searchText)")
-    let fetchRequest = NSFetchRequest(entityName: "PushMessages")
+    let fetchRequest: NSFetchRequest<PushMessages> = PushMessages.fetchRequest()
+    // let fetchRequest = NSFetchRequest(entityName: "PushMessages")
     
     fetchRequest.fetchBatchSize = 100
-    let sortDescriptor = NSSortDescriptor(key: "timeReceived", ascending: false)
+    let sortDescriptor = SortDescriptor(key: "timeReceived", ascending: false)
     fetchRequest.sortDescriptors = [sortDescriptor]
     
     if (searchText.characters.count != 0) {
-        fetchRequest.predicate = NSPredicate(format: "messageText contains[c] %@", searchText)
+        fetchRequest.predicate = Predicate(format: "messageText contains[c] %@", searchText)
     } else {
         fetchRequest.predicate = nil
     }
     
     do {
-        let records = try context.executeFetchRequest(fetchRequest)
+        let records = try context.fetch(fetchRequest)
         print (records.count)
     } catch {
         let fetchError = error as NSError

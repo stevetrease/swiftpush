@@ -18,24 +18,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         switch (application.applicationState) {
-        case UIApplicationState.Active:
+        case UIApplicationState.active:
             print ("didFinishLaunchingWithOptions - active")
-        case UIApplicationState.Inactive:
+        case UIApplicationState.inactive:
             print ("didFinishLaunchingWithOptions - inactive")
-        case UIApplicationState.Background:
+        case UIApplicationState.background:
             print ("didFinishLaunchingWithOptions - background")
         }
         
-        let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
+        let versionNumber: AnyObject? = Bundle.main().infoDictionary?["CFBundleVersion"]
         print ("version \(versionNumber!)")
         
         // Fetch Main Storyboard
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         // Instantiate Root Navigation Controller
-        let rootNavigationController = mainStoryboard.instantiateViewControllerWithIdentifier("StoryboardIDRootNavigationController") as! UINavigationController
+        let rootNavigationController = mainStoryboard.instantiateViewController(withIdentifier: "StoryboardIDRootNavigationController") as! UINavigationController
         
         // Configure View Controller
         let viewController = rootNavigationController.topViewController as? ViewController
@@ -45,10 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // count records and display in startup message
-        let fetch = NSFetchRequest (entityName: "PushMessages")
+        let fetch: NSFetchRequest<PushMessages> = PushMessages.fetchRequest()
+        // let fetch = NSFetchRequest (entityName: "PushMessages")
         do {
-            let records = try self.managedObjectContext.executeFetchRequest(fetch)
-            newRecord("Swift Push (\(versionNumber!)) starting on " + UIDevice.currentDevice().name + " with \(records.count) of \(maximumRecords) records", alert: true, messageID: 0)
+            let records = try self.managedObjectContext.fetch(fetch)
+            newRecord("Swift Push (\(versionNumber!)) starting on " + UIDevice.current().name + " with \(records.count) of \(maximumRecords) records", alert: true, messageID: 0)
         } catch {
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.userInfo)")
@@ -59,13 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
         // Configure Window
         window?.rootViewController = rootNavigationController
-        
-        // setup push notifications
+
+        // register for notifications
         let types: UIUserNotificationType =
-        [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
-        
-        let settings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: types, categories: nil )
-        
+            [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+        let settings: UIUserNotificationSettings = UIUserNotificationSettings( types: types, categories: nil )
         application.registerUserNotificationSettings( settings )
         application.registerForRemoteNotifications()
         
@@ -73,48 +72,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:Data) {
         // let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
         
         print("device token is " + deviceToken.description)
-        NSUserDefaults.standardUserDefaults().setObject(deviceToken.description as String, forKey:"deviceToken")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard().set(deviceToken.description as String, forKey:"deviceToken")
+        UserDefaults.standard().synchronize()
         
         newRecord("Device token is \(deviceToken.description)", alert: false, messageID: 0)
         
-        let receipt = NSBundle.mainBundle().appStoreReceiptURL?.lastPathComponent
+        let receipt = Bundle.main().appStoreReceiptURL?.lastPathComponent
         let mode = receipt
-        let versionNumber: AnyObject? = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"]
+        let versionNumber: AnyObject? = Bundle.main().infoDictionary?["CFBundleVersion"]
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.trease.eu/ibeacon/swiftpush/")!)
-        request.HTTPMethod = "POST"
+        var request = URLRequest(url: URL(string: "https://www.trease.eu/ibeacon/swiftpush/")!)
+        request.httpMethod = "POST"
         var bodyData = "token=\(deviceToken.description)"
-        bodyData += "&device=\(UIDevice.currentDevice().name)"
+        bodyData += "&device=\(UIDevice.current().name)"
         bodyData += "&mode=\(mode!)"
         bodyData += "&version=\(versionNumber!)"
         bodyData += "&type=iOS"
-        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        request.httpBody = bodyData.data(using: String.Encoding.utf8)
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+        let task = URLSession.shared().dataTask(with: request as URLRequest) {
             data, response, error in
-            let x = response as? NSHTTPURLResponse
+            let x = response as? HTTPURLResponse
             print ("status code \(x?.statusCode)")
         }
         task.resume()
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error:NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error:NSError) {
         print("Failed to register device token")
         print( error.localizedDescription )
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         switch (application.applicationState) {
-        case UIApplicationState.Active:
+        case UIApplicationState.active:
             print ("notification received by AppDeligate whilst active")
-        case UIApplicationState.Inactive:
+        case UIApplicationState.inactive:
             print ("notification received by AppDeligate whilst inactive")
-        case UIApplicationState.Background:
+        case UIApplicationState.background:
             print ("notification received by AppDeligate whilst in background")
         }
         print (userInfo)
@@ -147,38 +146,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         newRecord(messageStringFinal, alert: isAlert, messageID: messageIDFinal)
         
         // finished
-        completionHandler(UIBackgroundFetchResult.NewData)
+        completionHandler(UIBackgroundFetchResult.newData)
     }
     
     
     
 
-    func applicationWillResignActive(application: UIApplication) {}
+    func applicationWillResignActive(_ application: UIApplication) {}
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         saveManagedObjectContext()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {}
+    func applicationWillEnterForeground(_ application: UIApplication) {}
 
-    func applicationDidBecomeActive(application: UIApplication) {}
+    func applicationDidBecomeActive(_ application: UIApplication) {}
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         saveManagedObjectContext()
     }
     
     // MARK: -
     // MARK: Core Data Stack
     lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle.mainBundle().URLForResource("Swift_Push", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main().urlForResource("Swift_Push", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         let persistentStoreCoordinator = self.persistentStoreCoordinator
         
         // Initialize Managed Object Context
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         
         // Configure Managed Object Context
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
@@ -191,15 +190,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
         // URL Documents Directory
-        let URLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let URLs = FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)
         let applicationDocumentsDirectory = URLs[(URLs.count - 1)]
         
         // URL Persistent Store
-        let URLPersistentStore = applicationDocumentsDirectory.URLByAppendingPathComponent("Done.sqlite")
+        let URLPersistentStore = try! applicationDocumentsDirectory.appendingPathComponent("Done.sqlite")
         
         do {
             // Add Persistent Store to Persistent Store Coordinator
-            try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: URLPersistentStore, options: nil)
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: URLPersistentStore, options: nil)
             
         } catch {
             // Populate Error
