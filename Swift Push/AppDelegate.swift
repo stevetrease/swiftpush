@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-let maximumRecords = 500
+let maximumRecords = 1000
 
 
 @UIApplicationMain
