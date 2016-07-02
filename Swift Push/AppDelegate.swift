@@ -73,13 +73,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:Data) {
-        // let existingToken: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken")
+        var token: String = deviceToken.description
+        token = token.replacingOccurrences(of: "[^0-9 ]", with: "")
         
-        print("device token is " + deviceToken.description)
-        UserDefaults.standard().set(deviceToken.description as String, forKey:"deviceToken")
+        print("device token is \(token)")
+        UserDefaults.standard().set(token as String, forKey:"deviceToken")
         UserDefaults.standard().synchronize()
         
-        newRecord("Device token is \(deviceToken.description)", alert: false, messageID: 0)
+        newRecord("Device token is \(token)", alert: false, messageID: 0)
         
         let receipt = Bundle.main().appStoreReceiptURL?.lastPathComponent
         let mode = receipt
@@ -87,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var request = URLRequest(url: URL(string: "https://www.trease.eu/ibeacon/swiftpush/")!)
         request.httpMethod = "POST"
-        var bodyData = "token=\(deviceToken.description)"
+        var bodyData = "token=\(token)"
         bodyData += "&device=\(UIDevice.current().name)"
         bodyData += "&mode=\(mode!)"
         bodyData += "&version=\(versionNumber!)"
