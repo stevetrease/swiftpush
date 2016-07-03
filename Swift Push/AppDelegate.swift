@@ -73,9 +73,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:Data) {
-        var token: String = deviceToken.description
-        token = token.replacingOccurrences(of: "[^0-9 ]", with: "")
-        
+        let characterSet: CharacterSet = CharacterSet( charactersIn: "<>" )
+        let token: String = ( deviceToken.description as NSString )
+            .trimmingCharacters( in: characterSet )
+            .replacingOccurrences(of: " ", with: "" )
+       
         print("device token is \(token)")
         UserDefaults.standard().set(token as String, forKey:"deviceToken")
         UserDefaults.standard().synchronize()
